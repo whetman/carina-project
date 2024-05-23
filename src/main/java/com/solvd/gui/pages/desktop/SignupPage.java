@@ -95,36 +95,66 @@ public class SignupPage extends SignupPageBase {
         passwordBox.type(accountInformation.getPassword());
 
         daysDropdown.click();
+        daysDropdown.select(accountInformation.getDayOfBirth());
 
-        days.stream()
-                .filter(day -> day.getText().equals(accountInformation.getDayOfBirth()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+//        days.stream()
+//                .filter(day -> day.getText().equals(accountInformation.getDayOfBirth()))
+//                .findFirst()
+//                .ifPresent(ExtendedWebElement::click);
+
+//        for (ExtendedWebElement day : days) {
+//            if(day.getText().equals(accountInformation.getDayOfBirth())){
+//                day.select(accountInformation.getDayOfBirth());
+//            }
+//        }
 
         monthsDropdown.click();
+        monthsDropdown.select(accountInformation.getMonthOfBirth());
 
-        months.stream()
-                .filter(month -> month.getText().equals(accountInformation.getMonthOfBirth()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+//        months.stream()
+//                .filter(month -> month.getText().equals(accountInformation.getMonthOfBirth()))
+//                .findFirst()
+//                .ifPresent(ExtendedWebElement::click);
+
+//        for (ExtendedWebElement month : months) {
+//            if(month.getText().equals(accountInformation.getMonthOfBirth())){
+//                month.select(accountInformation.getMonthOfBirth());
+//            }
+//        }
+
 
         yearsDropdown.click();
+        yearsDropdown.select(accountInformation.getYearOfBirth());
 
-        years.stream()
-                .filter(year -> year.getText().equals(accountInformation.getYearOfBirth()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+//        years.stream()
+//                .filter(year -> year.getText().equals(accountInformation.getYearOfBirth()))
+//                .findFirst()
+//                .ifPresent(ExtendedWebElement::click);
+
+//        for (ExtendedWebElement year : years) {
+//            if(year.getText().equals(accountInformation.getYearOfBirth())){
+//                year.select(accountInformation.getYearOfBirth());
+//            }
+//        }
 
         firstNameBox.type(accountInformation.getSignupName());
         lastnameNameBox.type(accountInformation.getLastName());
         addressBox.type(accountInformation.getAddress());
 
         countryDropdown.click();
+        countryDropdown.select(accountInformation.getCountry());
 
-        countries.stream()
-                .filter(country -> country.getText().equals(accountInformation.getCountry()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+//        countries.stream()
+//                .filter(country -> country.getText().equals(accountInformation.getCountry()))
+//                .findFirst()
+//                .ifPresent(ExtendedWebElement::click);
+
+//        for (ExtendedWebElement country : countries) {
+//            if(country.getText().equals(accountInformation.getCountry())){
+//                country.select(accountInformation.getCountry());
+//            }
+//        }
+
 
         stateBox.type(accountInformation.getState());
         cityBox.type(accountInformation.getCity());
