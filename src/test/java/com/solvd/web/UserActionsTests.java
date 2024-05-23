@@ -4,6 +4,7 @@ import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
 import com.solvd.gui.pages.common.HomePageBase;
+import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.core.IAbstractTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,11 +43,8 @@ public class UserActionsTests implements IAbstractTest {
         HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
         homePage.open();
 
-        homePage.signUp(accountInfo.getSignupName(), accountInfo.getSignupEmail());
-
-
-
-
+        SignupPageBase signupPageBase = homePage.signUp(accountInfo.getSignupName(), accountInfo.getSignupEmail());
+        signupPageBase.enterAccountInformation(accountInfo);
 
 
 

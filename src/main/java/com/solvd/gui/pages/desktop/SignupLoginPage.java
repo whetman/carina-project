@@ -47,6 +47,7 @@ public class SignupLoginPage extends SignupLoginPageBase {
         LOGGER.info("createAccount() " + name + ", " + email);
         nameBar.type(name);
         emailSignupBar.type(email);
+        signupButton.click();
         return initPage(getDriver(), SignupPageBase.class);
     }
 
