@@ -19,9 +19,9 @@ public class UserActionsTests implements IAbstractTest {
     @DataProvider(name = "newAccountData", parallel = true)
     public Object[][] createAccountData() {
         return new Object[][]{
-                {new AccountInformation("Agata", "agata@email.com", Gender.MRS.getValue(), "password3", "26", "4", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Maria", "maria999@email.com", Gender.MRS.getValue(), "password3", "26", "4", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Ewa", "ewa@email.com", Gender.MRS.getValue(), "password3", "26", "4", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Agata", "agata@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Maria", "maria999@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Ewa", "ewa@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
         };
     }
 
