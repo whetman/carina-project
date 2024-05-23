@@ -12,4 +12,6 @@ public abstract class SignupLoginPageBase extends AbstractPage {
     public SignupLoginPageBase(WebDriver driver) {
         super(driver);
     }
+
+    public abstract SignupPageBase createAccount(String name, String email);
 }
