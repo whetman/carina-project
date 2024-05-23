@@ -13,7 +13,6 @@ This project requires JDK 21 or higher. Make sure you have the correct version i
 - Practice with automation tests for Android platform; learn how to set up and use emulators for automation writing and running.
 - Practice with different contexts in mobile automation
 - Practice with automation tests for iOS platform; learn how to set up and use simulator for automation writing and running.
-- 
 
 ## Project Structure
 
