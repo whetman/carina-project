@@ -95,36 +95,20 @@ public class SignupPage extends SignupPageBase {
         passwordBox.type(accountInformation.getPassword());
 
         daysDropdown.click();
-
-        days.stream()
-                .filter(day -> day.getText().equals(accountInformation.getDayOfBirth()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+        daysDropdown.select(accountInformation.getDayOfBirth());
 
         monthsDropdown.click();
-
-        months.stream()
-                .filter(month -> month.getText().equals(accountInformation.getMonthOfBirth()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+        monthsDropdown.select(accountInformation.getMonthOfBirth());
 
         yearsDropdown.click();
-
-        years.stream()
-                .filter(year -> year.getText().equals(accountInformation.getYearOfBirth()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+        yearsDropdown.select(accountInformation.getYearOfBirth());
 
         firstNameBox.type(accountInformation.getSignupName());
         lastnameNameBox.type(accountInformation.getLastName());
         addressBox.type(accountInformation.getAddress());
 
         countryDropdown.click();
-
-        countries.stream()
-                .filter(country -> country.getText().equals(accountInformation.getCountry()))
-                .findFirst()
-                .ifPresent(ExtendedWebElement::click);
+        countryDropdown.select(accountInformation.getCountry());
 
         stateBox.type(accountInformation.getState());
         cityBox.type(accountInformation.getCity());
