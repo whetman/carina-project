@@ -8,7 +8,7 @@
 	<artifactId>carina-project</artifactId>
 	<version>1.0</version>
 	<packaging>jar</packaging>
-	<name>CarinaDemo</name>
+	<name>carina-project</name>
 	<url>https://qaprosoft.com</url>
 
 	<properties>

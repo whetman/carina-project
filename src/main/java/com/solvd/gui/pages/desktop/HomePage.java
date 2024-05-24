@@ -18,6 +18,8 @@ import java.util.Random;
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
 
+    //todo google data agreement
+
     private static final Logger LOGGER = LoggerFactory.getLogger(HomePage.class);
 
     private ConfigManager configManager = new ConfigManager();
