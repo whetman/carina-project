@@ -57,18 +57,18 @@ public class UserActionsTests extends AbstractTest {
 
         homePage.login(email, password);
 
-        homePage.addRandomProductToCart();
-        homePage.addRandomProductToCart();
-        homePage.addRandomProductToCart();
+        String productAdded = homePage.addRandomProductToCart();
+        String productAddedTwo = homePage.addRandomProductToCart();
+        String productAddedThree = homePage.addRandomProductToCart();
 
         CartPageBase cartPageBase = homePage.goToCart();
-        String cartItemDescription = cartPageBase.getCartItemDescription(0);
-        String cartItemDescription1 = cartPageBase.getCartItemDescription(1);
-        String cartItemDescription2 = cartPageBase.getCartItemDescription(2);
+        String cartItemDescriptionOne = cartPageBase.getCartItemDescription(0);
+        String cartItemDescriptionTwo = cartPageBase.getCartItemDescription(1);
+        String cartItemDescriptionThree = cartPageBase.getCartItemDescription(2);
 
-        LOGGER.info("Cart item 0 desc: " + cartItemDescription);
-        LOGGER.info("Cart item 1 desc: " + cartItemDescription1);
-        LOGGER.info("Cart item 2 desc: " + cartItemDescription2);
+        softAssert.assertTrue(cartItemDescriptionOne.contains(productAdded), "Products are not the same");
+        softAssert.assertTrue(cartItemDescriptionTwo.contains(productAddedTwo), "Products are not the same");
+        softAssert.assertTrue(cartItemDescriptionThree.contains(productAddedThree), "Products are not the same");
 
 
         softAssert.assertAll();

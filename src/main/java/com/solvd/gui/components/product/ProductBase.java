@@ -19,6 +19,12 @@ public abstract class ProductBase extends AbstractUIObject {
     @FindBy(xpath = "//button[contains(text(), 'Continue')]")
     protected ExtendedWebElement continueButton;
 
+    @FindBy(xpath = ".//div[@class='single-products']//div[contains(@class, 'productinfo')]//h2")
+    protected ExtendedWebElement productPrice;
+
+    @FindBy(xpath = ".//div[@class='single-products']//div[contains(@class, 'productinfo')]//p")
+    protected ExtendedWebElement productDescription;
+
     public ProductBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -28,5 +34,8 @@ public abstract class ProductBase extends AbstractUIObject {
     public abstract void clickAddToCartButton(int index);
 
     public abstract void hoverOverProduct(int index);
+
+    public abstract String getProductPrice();
+    public abstract String getProductDescription();
 
 }

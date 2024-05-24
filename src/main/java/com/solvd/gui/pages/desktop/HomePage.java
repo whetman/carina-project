@@ -30,7 +30,7 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public void addRandomProductToCart() {
+    public String addRandomProductToCart() {
 
         Random rand = new Random();
         int index = rand.nextInt(featuresItems.getProducts().size());
@@ -41,6 +41,7 @@ public class HomePage extends HomePageBase {
         product.hoverOverProduct(index);
         product.clickAddToCartButton(index);
         product.clickContinueButton();
+        return product.getProductDescription();
 
     }
 

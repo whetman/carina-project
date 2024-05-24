@@ -31,7 +31,7 @@ public abstract class HomePageBase extends AbstractPage {
 
     public abstract FeaturesItems getFeaturesItems();
 
-    public abstract void addRandomProductToCart();
+    public abstract String addRandomProductToCart();
 
     public abstract CartPageBase goToCart();
 

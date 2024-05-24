@@ -32,6 +32,16 @@ public class Product extends ProductBase {
         productHoverElement.get(index).hover();
     }
 
+    @Override
+    public String getProductPrice() {
+        return productPrice.getText();
+    }
+
+    @Override
+    public String getProductDescription() {
+        return productDescription.getText();
+    }
+
     public List<ExtendedWebElement> getProductButton() {
         return productButton;
     }
