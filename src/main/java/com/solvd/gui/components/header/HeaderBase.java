@@ -25,5 +25,6 @@ public abstract class HeaderBase extends AbstractUIObject {
     }
 
     public abstract SignupLoginPageBase openSignupLoginPage();
+
     public abstract CartPageBase openCartPage();
 }

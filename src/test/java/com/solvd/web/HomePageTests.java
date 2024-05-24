@@ -1,23 +1,21 @@
 package com.solvd.web;
 
 import com.solvd.gui.pages.common.HomePageBase;
-import com.zebrunner.carina.core.IAbstractTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class HomePageTests implements IAbstractTest {
+public class HomePageTests extends AbstractTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomePageTests.class);
 
     @Test
-    public void openHomePage(){
+    public void validateOpenHomePage() {
 
         SoftAssert sa = new SoftAssert();
 
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.open();
+        HomePageBase homePage = openHomePage();
 
         sa.assertTrue(homePage.isPageOpened(), "Home page is not opened");
         sa.assertTrue(homePage.getHeader().isDisplayed(), "Header is not visible");

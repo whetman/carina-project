@@ -4,6 +4,7 @@ import com.solvd.gui.components.featuresitems.FeaturesItems;
 import com.solvd.gui.components.header.Header;
 import com.solvd.gui.components.product.Product;
 import com.solvd.gui.config.ConfigManager;
+import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
@@ -44,14 +45,22 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public void goToCart() {
-        header.openCartPage();
+    public CartPageBase goToCart() {
+        CartPageBase cartPageBase = header.openCartPage();
+        return cartPageBase;
     }
 
     @Override
     public SignupPageBase signUp(String name, String email) {
         SignupLoginPageBase signupLoginPage = header.openSignupLoginPage();
         return signupLoginPage.createAccount(name, email);
+    }
+
+    @Override
+    public HomePageBase login(String email, String password) {
+        SignupLoginPageBase signupLoginPageBase = header.openSignupLoginPage();
+        HomePageBase loggedHomePage = signupLoginPageBase.login(email, password);
+        return loggedHomePage;
     }
 
     @Override

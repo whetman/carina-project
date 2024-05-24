@@ -26,11 +26,18 @@ public abstract class HomePageBase extends AbstractPage {
     }
 
     public abstract HeaderBase getHeader();
+
     public abstract String getHomePageUrl();
+
     public abstract FeaturesItems getFeaturesItems();
+
     public abstract void addRandomProductToCart();
-    public abstract void goToCart();
+
+    public abstract CartPageBase goToCart();
+
     public abstract SignupPageBase signUp(String name, String email);
+
+    public abstract HomePageBase login(String email, String password);
 
     @Override
     public void open() {
