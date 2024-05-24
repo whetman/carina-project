@@ -50,6 +50,7 @@ public class UserActionsTests extends AbstractTest {
         signupPageBase.enterAccountInformation(accountInfo);
 
         //todo delete account
+        //todo mac test
 
 
         softAssert.assertAll();
