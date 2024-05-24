@@ -49,6 +49,8 @@ public class UserActionsTests extends AbstractTest {
         SignupPageBase signupPageBase = homePage.signUp(accountInfo.getSignupName(), accountInfo.getSignupEmail());
         signupPageBase.enterAccountInformation(accountInfo);
 
+        //todo delete account
+
 
         softAssert.assertAll();
     }
