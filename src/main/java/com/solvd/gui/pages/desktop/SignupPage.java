@@ -107,6 +107,8 @@ public class SignupPage extends SignupPageBase {
         lastnameNameBox.type(accountInformation.getLastName());
         addressBox.type(accountInformation.getAddress());
 
+        countryDropdown.scrollTo();
+
         countryDropdown.click();
         countryDropdown.select(accountInformation.getCountry());
 

@@ -9,7 +9,6 @@ import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,12 +21,6 @@ public class HomePage extends HomePageBase {
 
     private ConfigManager configManager = new ConfigManager();
     private String homePageUrl;
-
-    @FindBy(id = "header")
-    private Header header;
-
-    @FindBy(xpath = "//div[contains(@class, 'features')]")
-    private FeaturesItems featuresItems;
 
     public HomePage(WebDriver driver) {
         super(driver);
