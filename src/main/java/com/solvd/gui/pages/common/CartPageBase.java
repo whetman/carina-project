@@ -18,10 +18,12 @@ public abstract class CartPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract void buyProducts();
+    public abstract CheckoutPageBase buyProducts();
 
     public abstract String getCartItemDescription(int index);
+
     public abstract void getCartItemsPrices();
+
     public abstract void getCartItemsQuantities();
 
 }

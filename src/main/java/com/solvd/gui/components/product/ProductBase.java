@@ -36,6 +36,7 @@ public abstract class ProductBase extends AbstractUIObject {
     public abstract void hoverOverProduct(int index);
 
     public abstract String getProductPrice();
+
     public abstract String getProductDescription();
 
 }
