@@ -7,11 +7,9 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Header extends HeaderBase{
+public class Header extends HeaderBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Header.class);
-
-
 
     public Header(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);

@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class FeaturesItems extends FeaturesItemsBase{
+public class FeaturesItems extends FeaturesItemsBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Header.class);
 

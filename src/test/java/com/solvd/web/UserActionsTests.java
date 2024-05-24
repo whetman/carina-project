@@ -3,16 +3,16 @@ package com.solvd.web;
 import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
+import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
-import com.zebrunner.carina.core.IAbstractTest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class UserActionsTests implements IAbstractTest {
+public class UserActionsTests extends AbstractTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserActionsTests.class);
 
@@ -39,9 +39,7 @@ public class UserActionsTests implements IAbstractTest {
 
         SoftAssert softAssert = new SoftAssert();
 
-        //how to make it one method
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.open();
+        HomePageBase homePage = openHomePage();
 
         SignupPageBase signupPageBase = homePage.signUp(accountInfo.getSignupName(), accountInfo.getSignupEmail());
         signupPageBase.enterAccountInformation(accountInfo);
@@ -55,16 +53,22 @@ public class UserActionsTests implements IAbstractTest {
     public void verifyAddingProductsAndBuying(String email, String password, PaymentInformation paymentInformation) {
         SoftAssert softAssert = new SoftAssert();
 
-        //how to make it one method
-        HomePageBase homePage = initPage(getDriver(), HomePageBase.class);
-        homePage.open();
+        HomePageBase homePage = openHomePage();
+
+        homePage.login(email, password);
 
         homePage.addRandomProductToCart();
         homePage.addRandomProductToCart();
         homePage.addRandomProductToCart();
 
-        homePage.goToCart();
+        CartPageBase cartPageBase = homePage.goToCart();
+        String cartItemDescription = cartPageBase.getCartItemDescription(0);
+        String cartItemDescription1 = cartPageBase.getCartItemDescription(1);
+        String cartItemDescription2 = cartPageBase.getCartItemDescription(2);
 
+        LOGGER.info("Cart item 0 desc: " + cartItemDescription);
+        LOGGER.info("Cart item 1 desc: " + cartItemDescription1);
+        LOGGER.info("Cart item 2 desc: " + cartItemDescription2);
 
 
         softAssert.assertAll();
