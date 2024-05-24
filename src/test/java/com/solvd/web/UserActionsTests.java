@@ -66,6 +66,8 @@ public class UserActionsTests extends AbstractTest {
         String productAddedThree = homePage.addRandomProductToCart();
 
         CartPageBase cartPageBase = homePage.goToCart();
+
+        //todo create a stream that make this asserts
         String cartItemDescriptionOne = cartPageBase.getCartItemDescription(0);
         String cartItemDescriptionTwo = cartPageBase.getCartItemDescription(1);
         String cartItemDescriptionThree = cartPageBase.getCartItemDescription(2);
