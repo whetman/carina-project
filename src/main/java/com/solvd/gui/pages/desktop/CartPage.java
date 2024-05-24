@@ -2,6 +2,7 @@ package com.solvd.gui.pages.desktop;
 
 import com.solvd.gui.components.cart.CartItem;
 import com.solvd.gui.pages.common.CartPageBase;
+import com.solvd.gui.pages.common.CheckoutPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 
@@ -16,8 +17,9 @@ public class CartPage extends CartPageBase {
     }
 
     @Override
-    public void buyProducts() {
+    public CheckoutPageBase buyProducts() {
         checkoutButton.click();
+        return initPage(getDriver(), CheckoutPageBase.class);
     }
 
     @Override

@@ -4,13 +4,18 @@ import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
 import com.solvd.gui.pages.common.CartPageBase;
+import com.solvd.gui.pages.common.CheckoutPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
+import com.solvd.gui.pages.common.PaymentDonePageBase;
+import com.solvd.gui.pages.common.PaymentPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
+
+import static org.testng.Assert.assertTrue;
 
 public class UserActionsTests extends AbstractTest {
 
@@ -45,7 +50,6 @@ public class UserActionsTests extends AbstractTest {
         signupPageBase.enterAccountInformation(accountInfo);
 
 
-
         softAssert.assertAll();
     }
 
@@ -70,7 +74,21 @@ public class UserActionsTests extends AbstractTest {
         softAssert.assertTrue(cartItemDescriptionTwo.contains(productAddedTwo), "Products are not the same");
         softAssert.assertTrue(cartItemDescriptionThree.contains(productAddedThree), "Products are not the same");
 
+        CheckoutPageBase checkoutPage = cartPageBase.buyProducts();
+        boolean areAddressesCorrect = checkoutPage.areAddressesCorrect();
+
+        softAssert.assertTrue(areAddressesCorrect, "Billing address and delivery address are not the same");
+
+        PaymentPageBase paymentPage = checkoutPage.placeOrder();
+        PaymentDonePageBase paymentDonePageBase = paymentPage.enterPaymentDetailsAndContinue(
+                paymentInformation.getNameOnCard(),
+                paymentInformation.getCardNumber(),
+                paymentInformation.getCvcNumber(),
+                paymentInformation.getExpirationMonth(),
+                paymentInformation.getExpirationYear());
 
         softAssert.assertAll();
+
+        assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
     }
 }

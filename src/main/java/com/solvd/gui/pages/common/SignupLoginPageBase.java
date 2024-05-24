@@ -40,5 +40,6 @@ public abstract class SignupLoginPageBase extends AbstractPage {
     }
 
     public abstract SignupPageBase createAccount(String name, String email);
+
     public abstract HomePageBase login(String email, String password);
 }
