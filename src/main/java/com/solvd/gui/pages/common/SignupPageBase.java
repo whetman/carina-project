@@ -74,5 +74,5 @@ public abstract class SignupPageBase extends AbstractPage {
         super(driver);
     }
 
-    public abstract void enterAccountInformation(AccountInformation accountInformation);
+    public abstract AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation);
 }

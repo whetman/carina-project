@@ -3,6 +3,7 @@ package com.solvd.web;
 import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
+import com.solvd.gui.pages.common.AccountCreatedPageBase;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.CheckoutPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
@@ -24,9 +25,9 @@ public class UserActionsTests extends AbstractTest {
     @DataProvider(name = "newAccountData", parallel = true)
     public Object[][] createAccountData() {
         return new Object[][]{
-                {new AccountInformation("Agata", "agata1@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Maria", "maria9991@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Ewa", "ewa1@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Agata", "agata141@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Maria", "maria994911@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Ewa", "ewa141@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
         };
     }
 
@@ -45,13 +46,13 @@ public class UserActionsTests extends AbstractTest {
         SoftAssert softAssert = new SoftAssert();
 
         HomePageBase homePage = openHomePage();
+        homePage.clickGoogleDataAgreementButton();
 
         SignupPageBase signupPageBase = homePage.signUp(accountInfo.getSignupName(), accountInfo.getSignupEmail());
-        signupPageBase.enterAccountInformation(accountInfo);
+        AccountCreatedPageBase accountCreatedPageBase = signupPageBase.enterAccountInformation(accountInfo);
+        HomePageBase homePageAccountCreated = accountCreatedPageBase.continueAfterAccountCreated();
 
-        //todo delete account
-        //todo mac test
-
+        HomePageBase homePageAccountDeleted = homePageAccountCreated.deleteAccount();
 
         softAssert.assertAll();
     }
@@ -61,6 +62,8 @@ public class UserActionsTests extends AbstractTest {
         SoftAssert softAssert = new SoftAssert();
 
         HomePageBase homePage = openHomePage();
+
+        homePage.clickGoogleDataAgreementButton();
 
         homePage.login(email, password);
 

@@ -60,10 +60,21 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
+    public void clickGoogleDataAgreementButton() {
+       googleDataAgreementButton.click();
+    }
+
+    @Override
     public HomePageBase login(String email, String password) {
         SignupLoginPageBase signupLoginPageBase = header.openSignupLoginPage();
         HomePageBase loggedHomePage = signupLoginPageBase.login(email, password);
         return loggedHomePage;
+    }
+
+    @Override
+    public HomePageBase deleteAccount() {
+        HomePageBase homePageAccountDeleted = header.deleteAccount().clickContinueToRedirect();
+        return homePageAccountDeleted;
     }
 
     @Override

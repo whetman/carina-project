@@ -2,6 +2,7 @@ package com.solvd.gui.pages.desktop;
 
 import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
+import com.solvd.gui.pages.common.AccountCreatedPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
@@ -18,7 +19,7 @@ public class SignupPage extends SignupPageBase {
     }
 
     @Override
-    public void enterAccountInformation(AccountInformation accountInformation) {
+    public AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation) {
 
         LOGGER.info("enterAccountInformation()");
 
@@ -53,6 +54,8 @@ public class SignupPage extends SignupPageBase {
         zipcodeBox.type(accountInformation.getZipcode());
         mobileNumberBox.type(accountInformation.getMobileNumber());
         createAccountButton.click();
+
+        return initPage(getDriver(), AccountCreatedPageBase.class);
 
     }
 }
