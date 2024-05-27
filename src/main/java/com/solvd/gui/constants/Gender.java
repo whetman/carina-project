@@ -1,6 +1,7 @@
 package com.solvd.gui.constants;
 
 public enum Gender {
+
     MR("Mr."),
     MRS("Mrs.");
 

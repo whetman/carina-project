@@ -4,12 +4,8 @@ import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public abstract class SignupLoginPageBase extends AbstractPage {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(SignupLoginPageBase.class);
 
     @FindBy(xpath = "//input[@name='name']")
     protected ExtendedWebElement nameBar;
@@ -42,4 +38,5 @@ public abstract class SignupLoginPageBase extends AbstractPage {
     public abstract SignupPageBase createAccount(String name, String email);
 
     public abstract HomePageBase login(String email, String password);
+
 }

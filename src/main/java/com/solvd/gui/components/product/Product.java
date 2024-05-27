@@ -49,5 +49,6 @@ public class Product extends ProductBase {
     public List<ExtendedWebElement> getProductHoverElement() {
         return productHoverElement;
     }
+
 }
 

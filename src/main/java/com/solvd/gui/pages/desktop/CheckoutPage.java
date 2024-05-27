@@ -18,6 +18,7 @@ public class CheckoutPage extends CheckoutPageBase {
 
     @Override
     public boolean areAddressesCorrect() {
+        LOGGER.info("areAddressesCorrect()");
         boolean personDetails = checkoutInformation.getAddressBilling().getAddressPersonDetails().getText()
                 .equals(checkoutInformation.getAddressDelivery().getAddressPersonDetails().getText());
         boolean country = checkoutInformation.getAddressBilling().getAddressCountry().getText()
@@ -34,8 +35,10 @@ public class CheckoutPage extends CheckoutPageBase {
 
     @Override
     public PaymentPageBase placeOrder() {
+        LOGGER.info("placeOrder()");
         placeOrderButton.scrollTo();
         placeOrderButton.click();
         return initPage(getDriver(), PaymentPageBase.class);
     }
+
 }

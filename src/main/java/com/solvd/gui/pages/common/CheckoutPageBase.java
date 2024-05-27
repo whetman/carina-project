@@ -19,5 +19,6 @@ public abstract class CheckoutPageBase extends AbstractPage {
     }
 
     public abstract boolean areAddressesCorrect();
+
     public abstract PaymentPageBase placeOrder();
 }

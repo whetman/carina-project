@@ -16,6 +16,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.IntStream;
+
 import static org.testng.Assert.assertTrue;
 
 public class UserActionsTests extends AbstractTest {
@@ -40,7 +44,7 @@ public class UserActionsTests extends AbstractTest {
         };
     }
 
-    @Test(testName = "#TC0001", description = "Verify that user can sign up", dataProvider = "newAccountData", priority = 1)
+    @Test(testName = "#TC0001", description = "Verify that user can sign up", dataProvider = "newAccountData", priority = 1, threadPoolSize = 2, invocationCount = 2)
     public void validateSignUp(AccountInformation accountInfo) {
 
         SoftAssert softAssert = new SoftAssert();
@@ -57,7 +61,7 @@ public class UserActionsTests extends AbstractTest {
         softAssert.assertAll();
     }
 
-    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0)
+    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
     public void verifyAddingProductsAndBuying(String email, String password, PaymentInformation paymentInformation) {
         SoftAssert softAssert = new SoftAssert();
 
@@ -73,14 +77,13 @@ public class UserActionsTests extends AbstractTest {
 
         CartPageBase cartPageBase = homePage.goToCart();
 
-        //todo create a stream that make this asserts
-        String cartItemDescriptionOne = cartPageBase.getCartItemDescription(0);
-        String cartItemDescriptionTwo = cartPageBase.getCartItemDescription(1);
-        String cartItemDescriptionThree = cartPageBase.getCartItemDescription(2);
+        List<String> productsAdded = Arrays.asList(productAdded, productAddedTwo, productAddedThree);
 
-        softAssert.assertTrue(cartItemDescriptionOne.contains(productAdded), "Products are not the same");
-        softAssert.assertTrue(cartItemDescriptionTwo.contains(productAddedTwo), "Products are not the same");
-        softAssert.assertTrue(cartItemDescriptionThree.contains(productAddedThree), "Products are not the same");
+        IntStream.range(0, productsAdded.size())
+                .forEach(i -> {
+                    String cartItemDescription = cartPageBase.getCartItemDescription(i);
+                    softAssert.assertTrue(cartItemDescription.contains(productsAdded.get(i)), "Products are not the same");
+                });
 
         CheckoutPageBase checkoutPage = cartPageBase.buyProducts();
         boolean areAddressesCorrect = checkoutPage.areAddressesCorrect();
@@ -99,4 +102,5 @@ public class UserActionsTests extends AbstractTest {
 
         assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
     }
+
 }

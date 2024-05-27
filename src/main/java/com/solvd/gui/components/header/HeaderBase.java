@@ -29,4 +29,5 @@ public abstract class HeaderBase extends AbstractUIObject {
     public abstract CartPageBase openCartPage();
 
     public abstract AccountDeletedPageBase deleteAccount();
+
 }

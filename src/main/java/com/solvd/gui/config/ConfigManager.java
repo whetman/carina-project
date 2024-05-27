@@ -32,15 +32,4 @@ public class ConfigManager {
         return property;
     }
 
-    public String getChromeDriverPath() {
-        return getProperty("chromeDriverPath");
-    }
-
-    public String getFirefoxDriverPath() {
-        return getProperty("firefoxDriverPath");
-    }
-
-    public String getSafariDriverPath() {
-        return getProperty("safariDriverPath");
-    }
 }

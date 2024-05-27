@@ -46,4 +46,5 @@ public class AddressBase extends AbstractUIObject {
     public ExtendedWebElement getAddressPhone() {
         return addressPhone;
     }
+
 }

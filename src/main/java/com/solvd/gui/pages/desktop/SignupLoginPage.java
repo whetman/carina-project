@@ -35,5 +35,4 @@ public class SignupLoginPage extends SignupLoginPageBase {
         return initPage(getDriver(), HomePageBase.class);
     }
 
-
 }

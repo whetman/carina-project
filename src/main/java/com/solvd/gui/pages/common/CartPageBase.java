@@ -22,8 +22,4 @@ public abstract class CartPageBase extends AbstractPage {
 
     public abstract String getCartItemDescription(int index);
 
-    public abstract void getCartItemsPrices();
-
-    public abstract void getCartItemsQuantities();
-
 }

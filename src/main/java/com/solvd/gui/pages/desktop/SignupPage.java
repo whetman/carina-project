@@ -56,6 +56,6 @@ public class SignupPage extends SignupPageBase {
         createAccountButton.click();
 
         return initPage(getDriver(), AccountCreatedPageBase.class);
-
     }
+
 }

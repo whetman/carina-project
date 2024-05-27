@@ -75,4 +75,5 @@ public abstract class SignupPageBase extends AbstractPage {
     }
 
     public abstract AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation);
+
 }
