@@ -33,4 +33,5 @@ public class Header extends HeaderBase {
         deleteAccountButton.click();
         return initPage(AccountDeletedPageBase.class);
     }
+
 }

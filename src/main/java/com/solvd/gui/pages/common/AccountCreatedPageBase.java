@@ -15,4 +15,5 @@ public abstract class AccountCreatedPageBase extends AbstractPage {
     }
 
     public abstract HomePageBase continueAfterAccountCreated();
+
 }

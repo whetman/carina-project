@@ -19,4 +19,5 @@ public abstract class CartBase extends AbstractUIObject {
     public List<CartItem> getCartItems() {
         return cartItems;
     }
+
 }

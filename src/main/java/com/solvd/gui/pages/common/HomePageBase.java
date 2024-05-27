@@ -51,4 +51,5 @@ public abstract class HomePageBase extends AbstractPage {
     public void open() {
         super.open();
     }
+
 }

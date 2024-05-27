@@ -17,4 +17,5 @@ public abstract class PaymentDonePageBase extends AbstractPage {
     public ExtendedWebElement getInvoiceButton() {
         return invoiceButton;
     }
+
 }

@@ -18,4 +18,5 @@ public abstract class AccountDeletedPageBase extends AbstractPage {
     }
 
     public abstract HomePageBase clickContinueToRedirect();
+
 }

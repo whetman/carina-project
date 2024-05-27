@@ -12,13 +12,13 @@ public abstract class CartItemBase extends AbstractUIObject {
     protected ExtendedWebElement cartItemDescription;
 
     @FindBy(xpath = ".//td[contains(@class, 'price')]")
-    protected ExtendedWebElement  cartItemPrice;
+    protected ExtendedWebElement cartItemPrice;
 
     @FindBy(xpath = ".//td[contains(@class, 'quantity')]")
-    protected ExtendedWebElement  cartItemQuantitie;
+    protected ExtendedWebElement cartItemQuantitie;
 
     @FindBy(xpath = ".//td[contains(@class, 'total')]")
-    protected ExtendedWebElement  cartItemTotal;
+    protected ExtendedWebElement cartItemTotal;
 
     @FindBy(xpath = ".//td[contains(@class, 'delete')]")
     protected ExtendedWebElement cartItemDeleteButton;
@@ -46,4 +46,5 @@ public abstract class CartItemBase extends AbstractUIObject {
     public ExtendedWebElement getCartItemsDeleteButtons() {
         return cartItemDeleteButton;
     }
+
 }

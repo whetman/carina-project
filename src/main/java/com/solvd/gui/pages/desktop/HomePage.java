@@ -18,8 +18,6 @@ import java.util.Random;
 @DeviceType(pageType = DeviceType.Type.DESKTOP, parentClass = HomePageBase.class)
 public class HomePage extends HomePageBase {
 
-    //todo google data agreement
-
     private static final Logger LOGGER = LoggerFactory.getLogger(HomePage.class);
 
     private ConfigManager configManager = new ConfigManager();
@@ -44,28 +42,31 @@ public class HomePage extends HomePageBase {
         product.clickAddToCartButton(index);
         product.clickContinueButton();
         return product.getProductDescription();
-
     }
 
     @Override
     public CartPageBase goToCart() {
+        LOGGER.info("goToCart()");
         CartPageBase cartPageBase = header.openCartPage();
         return cartPageBase;
     }
 
     @Override
     public SignupPageBase signUp(String name, String email) {
+        LOGGER.info("signUp(" + name + ", " + email + ")");
         SignupLoginPageBase signupLoginPage = header.openSignupLoginPage();
         return signupLoginPage.createAccount(name, email);
     }
 
     @Override
     public void clickGoogleDataAgreementButton() {
-       googleDataAgreementButton.click();
+        LOGGER.info("clickGoogleDataAgreementButton()");
+        googleDataAgreementButton.click();
     }
 
     @Override
     public HomePageBase login(String email, String password) {
+        LOGGER.info("login(" + email + ")");
         SignupLoginPageBase signupLoginPageBase = header.openSignupLoginPage();
         HomePageBase loggedHomePage = signupLoginPageBase.login(email, password);
         return loggedHomePage;
@@ -73,12 +74,14 @@ public class HomePage extends HomePageBase {
 
     @Override
     public HomePageBase deleteAccount() {
+        LOGGER.info("deleteAccount()");
         HomePageBase homePageAccountDeleted = header.deleteAccount().clickContinueToRedirect();
         return homePageAccountDeleted;
     }
 
     @Override
     public Header getHeader() {
+        LOGGER.info("getHeader()");
         return header;
     }
 
@@ -90,9 +93,9 @@ public class HomePage extends HomePageBase {
 
     @Override
     public FeaturesItems getFeaturesItems() {
+        LOGGER.info("getFeaturesItems()");
         return featuresItems;
     }
-
 
 }
 

@@ -102,4 +102,5 @@ public class UserActionsTests extends AbstractTest {
 
         assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
     }
+
 }

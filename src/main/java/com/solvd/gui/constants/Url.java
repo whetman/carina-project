@@ -8,4 +8,5 @@ public interface Url {
     String CART_URL = "https://www.automationexercise.com/view_cart";
     String CHECKOUT_URL = "https://www.automationexercise.com/checkout";
     String PAYMENT_URL = "https://www.automationexercise.com/payment";
+
 }
