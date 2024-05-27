@@ -1,5 +1,6 @@
 package com.solvd.gui.components.header;
 
+import com.solvd.gui.pages.common.AccountDeletedPageBase;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
 import org.openqa.selenium.SearchContext;
@@ -25,5 +26,11 @@ public class Header extends HeaderBase {
     public CartPageBase openCartPage() {
         cartButton.click();
         return initPage(getDriver(), CartPageBase.class);
+    }
+
+    @Override
+    public AccountDeletedPageBase deleteAccount() {
+        deleteAccountButton.click();
+        return initPage(AccountDeletedPageBase.class);
     }
 }
