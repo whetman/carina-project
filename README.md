@@ -35,5 +35,5 @@ This project uses the following dependencies:
 ## To-do
 
 - [ ] Migrate the whole pure-selenium project to the carina-project
-- [ ] Fix enterAccountInformation() to work correctly with dropdown menu
-- [ ] Find out how to make common methods for tests
+- [x] Fix enterAccountInformation() to work correctly with dropdown menu
+- [x] Find out how to make common methods for tests
