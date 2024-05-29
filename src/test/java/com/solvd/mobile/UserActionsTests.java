@@ -1,4 +1,4 @@
-package com.solvd.web;
+package com.solvd.mobile;
 
 import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
