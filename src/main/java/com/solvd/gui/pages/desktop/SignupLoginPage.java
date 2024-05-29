@@ -2,7 +2,6 @@ package com.solvd.gui.pages.desktop;
 
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
-import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -18,12 +17,11 @@ public class SignupLoginPage extends SignupLoginPageBase {
     }
 
     @Override
-    public SignupPageBase createAccount(String name, String email) {
+    public void createAccount(String name, String email) {
         LOGGER.info("createAccount() " + name + ", " + email);
         nameBar.type(name);
         emailSignupBar.type(email);
         signupButton.click();
-        return initPage(getDriver(), SignupPageBase.class);
     }
 
     @Override

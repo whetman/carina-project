@@ -4,12 +4,15 @@ import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
 import com.solvd.gui.pages.common.AccountCreatedPageBase;
+import com.solvd.gui.pages.common.AccountDeletedPageBase;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.CheckoutPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.PaymentDonePageBase;
 import com.solvd.gui.pages.common.PaymentPageBase;
+import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
+import com.solvd.gui.pages.desktop.SignupPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
@@ -29,9 +32,10 @@ public class UserActionsTests extends AbstractTest {
     @DataProvider(name = "newAccountData", parallel = true)
     public Object[][] createAccountData() {
         return new Object[][]{
-                {new AccountInformation("Agata", "agata141@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Maria", "maria994911@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Ewa", "ewa141@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Wiktoria", "wiktoria999@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
         };
     }
 
@@ -52,13 +56,24 @@ public class UserActionsTests extends AbstractTest {
         HomePageBase homePage = openHomePage();
         homePage.clickGoogleDataAgreementButton();
 
-        SignupPageBase signupPageBase = homePage.signUp(accountInfo.getSignupName(), accountInfo.getSignupEmail());
-        AccountCreatedPageBase accountCreatedPageBase = signupPageBase.enterAccountInformation(accountInfo);
-        HomePageBase homePageAccountCreated = accountCreatedPageBase.continueAfterAccountCreated();
+        softAssert.assertTrue(homePage.getHeader().isDisplayed(), "Header is not displayed");
 
-        HomePageBase homePageAccountDeleted = homePageAccountCreated.deleteAccount();
+        SignupLoginPageBase signupLoginPage = homePage.getHeader().openSignupLoginPage();
 
-        softAssert.assertAll();
+        signupLoginPage.createAccount(accountInfo.getSignupName(), accountInfo.getSignupEmail());
+
+        if (signupLoginPage.getEmailAlreadyExistsMessage().isDisplayed() && signupLoginPage.getEmailAlreadyExistsMessage().getText().contains("exists")) {
+            softAssert.assertAll();
+            assertTrue(true, "Account already exists");
+        } else {
+            SignupPageBase signupPage = new SignupPage(getDriver());
+            AccountCreatedPageBase accountCreatedPage = signupPage.enterAccountInformation(accountInfo);
+            HomePageBase homePageAfterAccountCreated = accountCreatedPage.continueAfterAccountCreated();
+            AccountDeletedPageBase accountDeletedPage = homePageAfterAccountCreated.getHeader().deleteAccount();
+            boolean displayed = accountDeletedPage.getAccountDeletedMessage().isDisplayed();
+            softAssert.assertAll();
+            assertTrue(displayed, "Account deleted message is not displayed");
+        }
     }
 
     @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)

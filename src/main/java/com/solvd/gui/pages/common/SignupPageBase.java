@@ -2,13 +2,12 @@ package com.solvd.gui.pages.common;
 
 import com.solvd.gui.models.AccountInformation;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.List;
 
-public abstract class SignupPageBase extends AbstractPage {
+public abstract class SignupPageBase extends AbstractPageBase {
 
     @FindBy(id = "id_gender1")
     protected ExtendedWebElement titleMr;

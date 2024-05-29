@@ -7,7 +7,6 @@ import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
-import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -52,13 +51,6 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public SignupPageBase signUp(String name, String email) {
-        LOGGER.info("signUp(" + name + ", " + email + ")");
-        SignupLoginPageBase signupLoginPage = header.openSignupLoginPage();
-        return signupLoginPage.createAccount(name, email);
-    }
-
-    @Override
     public void clickGoogleDataAgreementButton() {
         LOGGER.info("clickGoogleDataAgreementButton()");
         googleDataAgreementButton.click();
@@ -70,13 +62,6 @@ public class HomePage extends HomePageBase {
         SignupLoginPageBase signupLoginPageBase = header.openSignupLoginPage();
         HomePageBase loggedHomePage = signupLoginPageBase.login(email, password);
         return loggedHomePage;
-    }
-
-    @Override
-    public HomePageBase deleteAccount() {
-        LOGGER.info("deleteAccount()");
-        HomePageBase homePageAccountDeleted = header.deleteAccount().clickContinueToRedirect();
-        return homePageAccountDeleted;
     }
 
     @Override
