@@ -1,11 +1,10 @@
 package com.solvd.gui.pages.common;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class AccountDeletedPageBase extends AbstractPage {
+public abstract class AccountDeletedPageBase extends AbstractPageBase {
 
     @FindBy(xpath = "//h2[contains(@data-qa, 'deleted')]")
     protected ExtendedWebElement accountDeletedMessage;
@@ -19,4 +18,7 @@ public abstract class AccountDeletedPageBase extends AbstractPage {
 
     public abstract HomePageBase clickContinueToRedirect();
 
+    public ExtendedWebElement getAccountDeletedMessage() {
+        return accountDeletedMessage;
+    }
 }

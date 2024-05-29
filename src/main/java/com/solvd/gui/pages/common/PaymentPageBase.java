@@ -1,11 +1,10 @@
 package com.solvd.gui.pages.common;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class PaymentPageBase extends AbstractPage {
+public abstract class PaymentPageBase extends AbstractPageBase {
 
     @FindBy(xpath = "//input[@name='name_on_card']")
     protected ExtendedWebElement nameOnCardField;

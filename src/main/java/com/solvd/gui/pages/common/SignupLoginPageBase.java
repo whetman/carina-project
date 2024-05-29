@@ -1,11 +1,10 @@
 package com.solvd.gui.pages.common;
 
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
-import com.zebrunner.carina.webdriver.gui.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
 
-public abstract class SignupLoginPageBase extends AbstractPage {
+public abstract class SignupLoginPageBase extends AbstractPageBase {
 
     @FindBy(xpath = "//input[@name='name']")
     protected ExtendedWebElement nameBar;
@@ -28,15 +27,18 @@ public abstract class SignupLoginPageBase extends AbstractPage {
     @FindBy(xpath = "//div[contains(@class, 'login')]")
     protected ExtendedWebElement loginForm;
 
-    @FindBy(xpath = "//form[contains(@action, '/signup')]/p")
+    @FindBy(xpath = "//button[@type='submit']/preceding-sibling::p")
     protected ExtendedWebElement emailAlreadyExistsMessage;
 
     public SignupLoginPageBase(WebDriver driver) {
         super(driver);
     }
 
-    public abstract SignupPageBase createAccount(String name, String email);
+    public abstract void createAccount(String name, String email);
 
     public abstract HomePageBase login(String email, String password);
 
+    public ExtendedWebElement getEmailAlreadyExistsMessage() {
+        return emailAlreadyExistsMessage;
+    }
 }
