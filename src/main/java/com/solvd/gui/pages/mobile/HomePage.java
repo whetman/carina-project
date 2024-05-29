@@ -7,6 +7,7 @@ import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
+import com.solvd.gui.util.MobileContextUtils;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -26,6 +27,8 @@ public class HomePage extends HomePageBase {
         super(driver);
         LOGGER.info("HomePage()");
         this.homePageUrl = configManager.getProperty("url");
+        MobileContextUtils contextUtils = new MobileContextUtils();
+        contextUtils.switchMobileContext(MobileContextUtils.View.CHROMIUM);
     }
 
     @Override
