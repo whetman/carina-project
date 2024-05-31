@@ -12,9 +12,9 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 
-public abstract class AbstractTest implements IAbstractTest {
+public abstract class AbstractTestMobile implements IAbstractTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractTest.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(AbstractTestMobile.class);
 
     private WebDriver driver;
 
