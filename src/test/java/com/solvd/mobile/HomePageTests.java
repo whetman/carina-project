@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
-public class HomePageTests extends AbstractTest {
+public class HomePageTests extends AbstractTestMobile {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomePageTests.class);
 

@@ -1,6 +1,10 @@
 package com.solvd.web;
 
+import com.solvd.gui.components.featuresitems.FeaturesItems;
+import com.solvd.gui.components.header.HeaderBase;
+import com.solvd.gui.components.product.Product;
 import com.solvd.gui.constants.Gender;
+import com.solvd.gui.constants.ProductItems;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
 import com.solvd.gui.pages.common.AccountCreatedPageBase;
@@ -10,6 +14,7 @@ import com.solvd.gui.pages.common.CheckoutPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.PaymentDonePageBase;
 import com.solvd.gui.pages.common.PaymentPageBase;
+import com.solvd.gui.pages.common.ProductsPageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
 import com.solvd.gui.pages.desktop.SignupPage;
@@ -45,6 +50,16 @@ public class UserActionsTests extends AbstractTest {
                 {"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
                 {"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
                 {"wiktoria999@email.com", "password1", new PaymentInformation("Wik wik", "777888999555", "002", "10", "2080")},
+        };
+    }
+
+    @DataProvider(name = "searchData", parallel = true)
+    public Object[][] searchData() {
+        return new Object[][]{
+                {ProductItems.SHIRT.getValue()},
+                {ProductItems.SKIRT.getValue()},
+                {ProductItems.DRESS.getValue()},
+                {ProductItems.BOOK.getValue()}
         };
     }
 
@@ -116,6 +131,44 @@ public class UserActionsTests extends AbstractTest {
         softAssert.assertAll();
 
         assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
+    }
+
+    @Test(testName = "#TC0003", description = "Verify that search bar is working correctly", dataProvider = "searchData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+    public void verifySearchBar(String productName) {
+
+        SoftAssert softAssert = new SoftAssert();
+
+        HomePageBase homePage = openHomePage();
+
+        homePage.clickGoogleDataAgreementButton();
+
+        HeaderBase header = homePage.getHeader();
+
+        ProductsPageBase productsPage = header.openProductsPage();
+        ProductsPageBase productsPageSearched = productsPage.typeInSearchBar(productName);
+
+        softAssert.assertTrue(getDriver().getCurrentUrl().contains(productName), "Current url doesn't contain searched product name.");
+
+        FeaturesItems featuresItems = productsPageSearched.getFeaturesItems();
+
+        LOGGER.info("###SIZE: " + featuresItems.getProducts().size() + "n: " + productName);
+
+        List<Product> products = featuresItems.getProducts();
+
+
+        switch (productName) {
+            case "shirt":
+            case "dress":
+                softAssert.assertTrue(products.size() > 0, "Size of the list is 0");
+                break;
+            case "skirt":
+            case "book":
+                softAssert.assertTrue(products.size() == 0, "Size of the list is more than 0");
+                break;
+        }
+
+        softAssert.assertAll();
+
     }
 
 }
