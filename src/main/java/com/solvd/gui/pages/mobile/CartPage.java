@@ -36,4 +36,9 @@ public class CartPage extends CartPageBase implements IMobileUtils {
         return description;
     }
 
+    @Override
+    public String getCartItemQuantity(int index) {
+        return null;
+    }
+
 }

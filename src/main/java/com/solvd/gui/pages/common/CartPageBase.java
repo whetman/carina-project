@@ -20,5 +20,9 @@ public abstract class CartPageBase extends AbstractPageBase {
     public abstract CheckoutPageBase buyProducts();
 
     public abstract String getCartItemDescription(int index);
+    public abstract String getCartItemQuantity(int index);
 
+    public Cart getCart() {
+        return cart;
+    }
 }

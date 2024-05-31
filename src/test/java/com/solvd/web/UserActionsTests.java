@@ -1,5 +1,6 @@
 package com.solvd.web;
 
+import com.solvd.gui.components.cart.CartItem;
 import com.solvd.gui.components.featuresitems.FeaturesItems;
 import com.solvd.gui.components.header.HeaderBase;
 import com.solvd.gui.components.product.Product;
@@ -12,6 +13,7 @@ import com.solvd.gui.pages.common.AccountDeletedPageBase;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.CheckoutPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
+import com.solvd.gui.pages.common.ItemPageBase;
 import com.solvd.gui.pages.common.PaymentDonePageBase;
 import com.solvd.gui.pages.common.PaymentPageBase;
 import com.solvd.gui.pages.common.ProductsPageBase;
@@ -26,6 +28,7 @@ import org.testng.asserts.SoftAssert;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.stream.IntStream;
 
 import static org.testng.Assert.assertTrue;
@@ -168,6 +171,43 @@ public class UserActionsTests extends AbstractTest {
         }
 
         softAssert.assertAll();
+
+    }
+
+    //todo fix - sometimes element not clickable
+    @Test(testName = "#TC0004", description = "Verify that logged user can add multiple products of one kind to the cart", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+    public void verifyAddingMultipleProducts(String email, String password, PaymentInformation paymentInformation) {
+
+        SoftAssert softAssert = new SoftAssert();
+
+        HomePageBase homePage = openHomePage();
+
+        homePage.clickGoogleDataAgreementButton();
+
+        homePage.login(email, password);
+
+        Random random = new Random();
+        int i = random.nextInt(1, 15);
+
+        List<Product> products = homePage.getFeaturesItems().getProducts();
+        int size = products.size();
+
+        Product product = products.get(i);
+        boolean clickable = product.getViewProduct().isClickable();
+
+        ItemPageBase itemPage = product.clickViewProduct();
+
+        int q = random.nextInt(1, 50);
+        String quantity = "" + q;
+
+        itemPage.changeQuantity(quantity);
+        CartPageBase cartPage = itemPage.addToCart();
+        List<CartItem> cartItems = cartPage.getCart().getCartItems();
+        String quantityInCart = cartItems.get(1).getCartItemQuantity().getText();
+
+        softAssert.assertTrue(quantityInCart.equals(quantity), "Quantity in cart is different than quantity typed");
+        softAssert.assertAll();
+
 
     }
 

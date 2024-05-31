@@ -1,5 +1,6 @@
 package com.solvd.gui.components.product;
 
+import com.solvd.gui.pages.common.ItemPageBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
@@ -40,6 +41,12 @@ public class Product extends ProductBase {
     @Override
     public String getProductDescription() {
         return productDescription.getText();
+    }
+
+    @Override
+    public ItemPageBase clickViewProduct() {
+        viewProduct.click();
+        return initPage(getDriver(), ItemPageBase.class);
     }
 
     public List<ExtendedWebElement> getProductButton() {

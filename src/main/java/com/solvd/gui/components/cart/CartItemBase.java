@@ -15,7 +15,7 @@ public abstract class CartItemBase extends AbstractUIObject {
     protected ExtendedWebElement cartItemPrice;
 
     @FindBy(xpath = ".//td[contains(@class, 'quantity')]")
-    protected ExtendedWebElement cartItemQuantitie;
+    protected ExtendedWebElement cartItemQuantity;
 
     @FindBy(xpath = ".//td[contains(@class, 'total')]")
     protected ExtendedWebElement cartItemTotal;
@@ -36,7 +36,7 @@ public abstract class CartItemBase extends AbstractUIObject {
     }
 
     public String getCartItemsQuantities() {
-        return cartItemQuantitie.getText();
+        return cartItemQuantity.getText();
     }
 
     public String getCartItemsTotals() {
@@ -47,4 +47,23 @@ public abstract class CartItemBase extends AbstractUIObject {
         return cartItemDeleteButton;
     }
 
+    public ExtendedWebElement getCartItemDescription() {
+        return cartItemDescription;
+    }
+
+    public ExtendedWebElement getCartItemPrice() {
+        return cartItemPrice;
+    }
+
+    public ExtendedWebElement getCartItemQuantity() {
+        return cartItemQuantity;
+    }
+
+    public ExtendedWebElement getCartItemTotal() {
+        return cartItemTotal;
+    }
+
+    public ExtendedWebElement getCartItemDeleteButton() {
+        return cartItemDeleteButton;
+    }
 }

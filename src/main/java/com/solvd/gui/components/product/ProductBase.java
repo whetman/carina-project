@@ -1,5 +1,6 @@
 package com.solvd.gui.components.product;
 
+import com.solvd.gui.pages.common.ItemPageBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
@@ -25,6 +26,10 @@ public abstract class ProductBase extends AbstractUIObject {
     @FindBy(xpath = ".//div[@class='single-products']//div[contains(@class, 'productinfo')]//p")
     protected ExtendedWebElement productDescription;
 
+    //@FindBy(xpath = ".//div[@class='choose']")
+    @FindBy(xpath = ".//a[contains(text(), 'View Product')]")
+    protected ExtendedWebElement viewProduct;
+
     public ProductBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
@@ -39,4 +44,9 @@ public abstract class ProductBase extends AbstractUIObject {
 
     public abstract String getProductDescription();
 
+    public abstract ItemPageBase clickViewProduct();
+
+    public ExtendedWebElement getViewProduct() {
+        return viewProduct;
+    }
 }
