@@ -35,4 +35,12 @@ public class CartPage extends CartPageBase {
         return description;
     }
 
+    @Override
+    public String getCartItemQuantity(int index) {
+        LOGGER.info("getCartItemQuantity(" + index + ")");
+        List<CartItem> cartItems = cart.getCartItems();
+        String cartItemsQuantities = cartItems.get(index).getCartItemsQuantities();
+        return cartItemsQuantities;
+    }
+
 }
