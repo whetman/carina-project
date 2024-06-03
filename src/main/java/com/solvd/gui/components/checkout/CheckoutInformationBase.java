@@ -8,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 public class CheckoutInformationBase extends AbstractUIObject {
 
     @FindBy(id = "address_delivery")
-    protected AddressDelivery addressDelivery;
+    private AddressDelivery addressDelivery;
 
     @FindBy(id = "address_invoice")
-    protected AddressDelivery addressBilling;
+    private AddressDelivery addressBilling;
 
     public CheckoutInformationBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
