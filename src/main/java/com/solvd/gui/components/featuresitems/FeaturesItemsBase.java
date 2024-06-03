@@ -11,12 +11,13 @@ import java.util.List;
 public abstract class FeaturesItemsBase extends AbstractUIObject {
 
     @FindBy(xpath = ".//div[@class='product-image-wrapper']")
-    protected List<Product> products;
+    private List<Product> products;
 
     public FeaturesItemsBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
-    public abstract List<Product> getProducts();
-
+    public List<Product> getProducts() {
+        return products;
+    }
 }
