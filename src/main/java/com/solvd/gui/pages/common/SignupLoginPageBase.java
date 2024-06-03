@@ -3,32 +3,36 @@ package com.solvd.gui.pages.common;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class SignupLoginPageBase extends AbstractPageBase {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SignupLoginPageBase.class);
+
     @FindBy(xpath = "//input[@name='name']")
-    protected ExtendedWebElement nameBar;
+    private ExtendedWebElement nameBar;
 
     @FindBy(xpath = "//form[contains(@action, 'signup')]//input[@name = 'email']")
-    protected ExtendedWebElement emailSignupBar;
+    private ExtendedWebElement emailSignupBar;
 
     @FindBy(xpath = "//form[contains(@action, 'signup')]//button")
-    protected ExtendedWebElement signupButton;
+    private ExtendedWebElement signupButton;
 
     @FindBy(xpath = "//form[contains(@action, 'login')]//input[@name='email']")
-    protected ExtendedWebElement emailField;
+    private ExtendedWebElement emailField;
 
     @FindBy(xpath = "//input[@type='password']")
-    protected ExtendedWebElement passwordField;
+    private ExtendedWebElement passwordField;
 
     @FindBy(xpath = "//form[contains(@action, 'login')]//button")
-    protected ExtendedWebElement loginButton;
+    private ExtendedWebElement loginButton;
 
     @FindBy(xpath = "//div[contains(@class, 'login')]")
-    protected ExtendedWebElement loginForm;
+    private ExtendedWebElement loginForm;
 
     @FindBy(xpath = "//button[@type='submit']/preceding-sibling::p")
-    protected ExtendedWebElement emailAlreadyExistsMessage;
+    private ExtendedWebElement emailAlreadyExistsMessage;
 
     public SignupLoginPageBase(WebDriver driver) {
         super(driver);
@@ -38,7 +42,43 @@ public abstract class SignupLoginPageBase extends AbstractPageBase {
 
     public abstract HomePageBase login(String email, String password);
 
+    public ExtendedWebElement getNameBar() {
+        LOGGER.info("getNameBar()");
+        return nameBar;
+    }
+
+    public ExtendedWebElement getEmailSignupBar() {
+        LOGGER.info("getEmailSignupBar()");
+        return emailSignupBar;
+    }
+
+    public ExtendedWebElement getSignupButton() {
+        LOGGER.info("getSignupButton()");
+        return signupButton;
+    }
+
+    public ExtendedWebElement getEmailField() {
+        LOGGER.info("getEmailField()");
+        return emailField;
+    }
+
+    public ExtendedWebElement getPasswordField() {
+        LOGGER.info("getPasswordField()");
+        return passwordField;
+    }
+
+    public ExtendedWebElement getLoginButton() {
+        LOGGER.info("getLoginButton()");
+        return loginButton;
+    }
+
+    public ExtendedWebElement getLoginForm() {
+        LOGGER.info("getLoginForm()");
+        return loginForm;
+    }
+
     public ExtendedWebElement getEmailAlreadyExistsMessage() {
+        LOGGER.info("getEmailAlreadyExistsMessage()");
         return emailAlreadyExistsMessage;
     }
 }

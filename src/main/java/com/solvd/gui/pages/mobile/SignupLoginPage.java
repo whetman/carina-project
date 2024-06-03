@@ -20,17 +20,17 @@ public class SignupLoginPage extends SignupLoginPageBase implements IMobileUtils
     @Override
     public void createAccount(String name, String email) {
         LOGGER.info("createAccount() " + name + ", " + email);
-        nameBar.type(name);
-        emailSignupBar.type(email);
-        signupButton.click();
+        getNameBar().type(name);
+        getEmailSignupBar().type(email);
+        getSignupButton().click();
     }
 
     @Override
     public HomePageBase login(String email, String password) {
         LOGGER.info("login() " + email + ", " + password);
-        emailField.type(email);
-        passwordField.type(password);
-        loginButton.click();
+        getEmailField().type(email);
+        getPasswordField().type(password);
+        getLoginButton().click();
         return initPage(getDriver(), HomePageBase.class);
     }
 

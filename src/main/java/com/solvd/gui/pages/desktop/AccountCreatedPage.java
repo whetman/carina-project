@@ -19,7 +19,7 @@ public class AccountCreatedPage extends AccountCreatedPageBase {
     @Override
     public HomePageBase continueAfterAccountCreated() {
         LOGGER.info("continueAfterAccountCreated()");
-        continueButton.click();
+        getContinueButton().click();
         return initPage(getDriver(), HomePageBase.class);
     }
 

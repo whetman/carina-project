@@ -9,38 +9,22 @@ import org.openqa.selenium.support.FindBy;
 public abstract class CartItemBase extends AbstractUIObject {
 
     @FindBy(xpath = ".//td[contains(@class, 'description')]")
-    protected ExtendedWebElement cartItemDescription;
+    private ExtendedWebElement cartItemDescription;
 
     @FindBy(xpath = ".//td[contains(@class, 'price')]")
-    protected ExtendedWebElement cartItemPrice;
+    private ExtendedWebElement cartItemPrice;
 
     @FindBy(xpath = ".//td[contains(@class, 'quantity')]")
-    protected ExtendedWebElement cartItemQuantity;
+    private ExtendedWebElement cartItemQuantity;
 
     @FindBy(xpath = ".//td[contains(@class, 'total')]")
-    protected ExtendedWebElement cartItemTotal;
+    private ExtendedWebElement cartItemTotal;
 
     @FindBy(xpath = ".//td[contains(@class, 'delete')]")
-    protected ExtendedWebElement cartItemDeleteButton;
+    private ExtendedWebElement cartItemDeleteButton;
 
     public CartItemBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
-    }
-
-    public String getCartItemsDescriptions() {
-        return cartItemDescription.getText();
-    }
-
-    public String getCartItemsPrices() {
-        return cartItemPrice.getText();
-    }
-
-    public String getCartItemsQuantities() {
-        return cartItemQuantity.getText();
-    }
-
-    public String getCartItemsTotals() {
-        return cartItemTotal.getText();
     }
 
     public ExtendedWebElement getCartItemsDeleteButtons() {

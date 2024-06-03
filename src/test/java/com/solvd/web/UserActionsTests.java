@@ -208,7 +208,6 @@ public class UserActionsTests extends AbstractTest {
         softAssert.assertTrue(quantityInCart.equals(quantity), "Quantity in cart is different than quantity typed");
         softAssert.assertAll();
 
-
     }
 
 }

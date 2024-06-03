@@ -19,42 +19,40 @@ public class Product extends ProductBase {
 
     @Override
     public void clickContinueButton() {
-        continueButton.click();
+        LOGGER.info("clickContinueButton()");
+        getContinueButton().click();
     }
 
     @Override
     public void clickAddToCartButton(int index) {
-        productButton.get(index).click();
+        LOGGER.info("clickAddToCartButton(" + index + ")");
+        getProductButton().get(index).click();
     }
 
     @Override
     public void hoverOverProduct(int index) {
+        LOGGER.info("hoverOverProduct(" + index + ")");
         scrollTo();
-        productHoverElement.get(index).hover();
+        getProductHoverElement().get(index).hover();
     }
 
     @Override
-    public String getProductPrice() {
-        return productPrice.getText();
+    public String productPriceText() {
+        LOGGER.info("productPriceText()");
+        return getProductPrice().getText();
     }
 
     @Override
-    public String getProductDescription() {
-        return productDescription.getText();
+    public String productDescriptionText() {
+        LOGGER.info("productDescriptionText()");
+        return getProductDescription().getText();
     }
 
     @Override
     public ItemPageBase clickViewProduct() {
-        viewProduct.click();
+        LOGGER.info("clickViewProduct()");
+        getViewProduct().click();
         return initPage(getDriver(), ItemPageBase.class);
-    }
-
-    public List<ExtendedWebElement> getProductButton() {
-        return productButton;
-    }
-
-    public List<ExtendedWebElement> getProductHoverElement() {
-        return productHoverElement;
     }
 
 }

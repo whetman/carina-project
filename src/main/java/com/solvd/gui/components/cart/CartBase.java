@@ -10,7 +10,7 @@ import java.util.List;
 public abstract class CartBase extends AbstractUIObject {
 
     @FindBy(xpath = ".//tbody/tr")
-    protected List<CartItem> cartItems;
+    private List<CartItem> cartItems;
 
     public CartBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);

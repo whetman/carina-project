@@ -17,9 +17,4 @@ public class FeaturesItems extends FeaturesItemsBase {
         super(driver, searchContext);
     }
 
-    public List<Product> getProducts() {
-        LOGGER.info("getProducts()");
-        return products;
-    }
-
 }

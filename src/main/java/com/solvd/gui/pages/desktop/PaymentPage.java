@@ -19,12 +19,12 @@ public class PaymentPage extends PaymentPageBase {
     @Override
     public PaymentDonePageBase enterPaymentDetailsAndContinue(String nameOnCard, String cardNumber, String cvc, String expirationMonth, String expirationYear) {
         LOGGER.info("enterPaymentDetailsAndContinue()");
-        nameOnCardField.type(nameOnCard);
-        cardNumberField.type(cardNumber);
-        cvcField.type(cvc);
-        expirationMonthField.type(expirationMonth);
-        expirationYearField.type(expirationYear);
-        submitButton.click();
+        getNameOnCardField().type(nameOnCard);
+        getCardNumberField().type(cardNumber);
+        getCvcField().type(cvc);
+        getExpirationMonthField().type(expirationMonth);
+        getExpirationYearField().type(expirationYear);
+        getSubmitButton().click();
         return initPage(getDriver(), PaymentDonePageBase.class);
     }
 

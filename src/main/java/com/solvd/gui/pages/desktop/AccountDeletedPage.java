@@ -19,7 +19,7 @@ public class AccountDeletedPage extends AccountDeletedPageBase {
     @Override
     public HomePageBase clickContinueToRedirect() {
         LOGGER.info("clickContinueToRedirect()");
-        continueButton.click();
+        getContinueButton().click();
         return initPage(getDriver(), HomePageBase.class);
     }
 

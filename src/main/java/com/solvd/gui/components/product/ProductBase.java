@@ -12,23 +12,22 @@ import java.util.List;
 public abstract class ProductBase extends AbstractUIObject {
 
     @FindBy(xpath = "//div[@class='product-overlay']//a[contains(@class, 'btn')]")
-    protected List<ExtendedWebElement> productButton;
+    private List<ExtendedWebElement> productButton;
 
     @FindBy(xpath = "//div[contains(@class, 'features_items')]//div[@class='single-products']")
-    protected List<ExtendedWebElement> productHoverElement;
+    private List<ExtendedWebElement> productHoverElement;
 
     @FindBy(xpath = "//button[contains(text(), 'Continue')]")
-    protected ExtendedWebElement continueButton;
+    private ExtendedWebElement continueButton;
 
     @FindBy(xpath = ".//div[@class='single-products']//div[contains(@class, 'productinfo')]//h2")
-    protected ExtendedWebElement productPrice;
+    private ExtendedWebElement productPrice;
 
     @FindBy(xpath = ".//div[@class='single-products']//div[contains(@class, 'productinfo')]//p")
-    protected ExtendedWebElement productDescription;
+    private ExtendedWebElement productDescription;
 
-    //@FindBy(xpath = ".//div[@class='choose']")
     @FindBy(xpath = ".//a[contains(text(), 'View Product')]")
-    protected ExtendedWebElement viewProduct;
+    private ExtendedWebElement viewProduct;
 
     public ProductBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -40,11 +39,31 @@ public abstract class ProductBase extends AbstractUIObject {
 
     public abstract void hoverOverProduct(int index);
 
-    public abstract String getProductPrice();
-
-    public abstract String getProductDescription();
-
     public abstract ItemPageBase clickViewProduct();
+
+    public abstract String productDescriptionText();
+
+    public abstract String productPriceText();
+
+    public List<ExtendedWebElement> getProductButton() {
+        return productButton;
+    }
+
+    public List<ExtendedWebElement> getProductHoverElement() {
+        return productHoverElement;
+    }
+
+    public ExtendedWebElement getContinueButton() {
+        return continueButton;
+    }
+
+    public ExtendedWebElement getProductPrice() {
+        return productPrice;
+    }
+
+    public ExtendedWebElement getProductDescription() {
+        return productDescription;
+    }
 
     public ExtendedWebElement getViewProduct() {
         return viewProduct;
