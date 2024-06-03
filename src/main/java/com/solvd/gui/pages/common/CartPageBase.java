@@ -4,14 +4,18 @@ import com.solvd.gui.components.cart.Cart;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public abstract class CartPageBase extends AbstractPageBase {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CartPageBase.class);
+
     @FindBy(id = "cart_items")
-    protected Cart cart;
+    private Cart cart;
 
     @FindBy(xpath = "//a[contains(@class, 'check_out')]")
-    protected ExtendedWebElement checkoutButton;
+    private ExtendedWebElement checkoutButton;
 
     public CartPageBase(WebDriver driver) {
         super(driver);
@@ -24,5 +28,9 @@ public abstract class CartPageBase extends AbstractPageBase {
 
     public Cart getCart() {
         return cart;
+    }
+
+    public ExtendedWebElement getCheckoutButton() {
+        return checkoutButton;
     }
 }

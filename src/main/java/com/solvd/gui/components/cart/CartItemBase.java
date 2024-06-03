@@ -27,22 +27,6 @@ public abstract class CartItemBase extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public String getCartItemsDescriptions() {
-        return cartItemDescription.getText();
-    }
-
-    public String getCartItemsPrices() {
-        return cartItemPrice.getText();
-    }
-
-    public String getCartItemsQuantities() {
-        return cartItemQuantity.getText();
-    }
-
-    public String getCartItemsTotals() {
-        return cartItemTotal.getText();
-    }
-
     public ExtendedWebElement getCartItemsDeleteButtons() {
         return cartItemDeleteButton;
     }

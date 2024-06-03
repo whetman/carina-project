@@ -24,15 +24,15 @@ public class CartPage extends CartPageBase implements IMobileUtils {
     @Override
     public CheckoutPageBase buyProducts() {
         LOGGER.info("buyProducts()");
-        checkoutButton.click();
+        getCheckoutButton().click();
         return initPage(getDriver(), CheckoutPageBase.class);
     }
 
     @Override
     public String getCartItemDescription(int index) {
         LOGGER.info("getCartItemDescription(" + index + ")");
-        List<CartItem> cartItems = cart.getCartItems();
-        String description = cartItems.get(index).getCartItemsDescriptions();
+        List<CartItem> cartItems = getCart().getCartItems();
+        String description = cartItems.get(index).getCartItemsDescription();
         return description;
     }
 
