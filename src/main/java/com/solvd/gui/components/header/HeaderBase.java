@@ -13,16 +13,16 @@ import org.openqa.selenium.support.FindBy;
 public abstract class HeaderBase extends AbstractUIObject {
 
     @FindBy(xpath = ".//a[@href='/login']")
-    protected ExtendedWebElement signUpLoginButton;
+    private ExtendedWebElement signUpLoginButton;
 
     @FindBy(xpath = ".//a[@href='/view_cart']")
-    protected ExtendedWebElement cartButton;
+    private ExtendedWebElement cartButton;
 
     @FindBy(xpath = ".//a[contains(@href, 'delete')]")
-    protected ExtendedWebElement deleteAccountButton;
+    private ExtendedWebElement deleteAccountButton;
 
     @FindBy(xpath = ".//a[contains(@href, '/products')]")
-    protected ExtendedWebElement productsPage;
+    private ExtendedWebElement productsPage;
 
     public HeaderBase(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
@@ -36,4 +36,19 @@ public abstract class HeaderBase extends AbstractUIObject {
 
     public abstract ProductsPageBase openProductsPage();
 
+    public ExtendedWebElement getSignUpLoginButton() {
+        return signUpLoginButton;
+    }
+
+    public ExtendedWebElement getCartButton() {
+        return cartButton;
+    }
+
+    public ExtendedWebElement getDeleteAccountButton() {
+        return deleteAccountButton;
+    }
+
+    public ExtendedWebElement getProductsPage() {
+        return productsPage;
+    }
 }

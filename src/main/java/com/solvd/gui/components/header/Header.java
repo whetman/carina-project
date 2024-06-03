@@ -19,25 +19,29 @@ public class Header extends HeaderBase {
 
     @Override
     public SignupLoginPageBase openSignupLoginPage() {
-        signUpLoginButton.click();
+        LOGGER.info("openSignupLoginPage()");
+        getSignUpLoginButton().click();
         return initPage(getDriver(), SignupLoginPageBase.class);
     }
 
     @Override
     public CartPageBase openCartPage() {
-        cartButton.click();
+        LOGGER.info("openCartPage()");
+        getCartButton().click();
         return initPage(getDriver(), CartPageBase.class);
     }
 
     @Override
     public AccountDeletedPageBase deleteAccount() {
-        deleteAccountButton.click();
+        LOGGER.info("deleteAccount()");
+        getDeleteAccountButton().click();
         return initPage(AccountDeletedPageBase.class);
     }
 
     @Override
     public ProductsPageBase openProductsPage() {
-        productsPage.click();
+        LOGGER.info("openProductsPage()");
+        getProductsPage().click();
         return initPage(ProductsPageBase.class);
     }
 
