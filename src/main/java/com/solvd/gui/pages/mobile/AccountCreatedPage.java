@@ -3,13 +3,12 @@ package com.solvd.gui.pages.mobile;
 import com.solvd.gui.pages.common.AccountCreatedPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = AccountCreatedPageBase.class)
-public class AccountCreatedPage extends AccountCreatedPageBase implements IMobileUtils {
+public class AccountCreatedPage extends AccountCreatedPageBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AccountCreatedPage.class);
 

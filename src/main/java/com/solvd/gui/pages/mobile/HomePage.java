@@ -1,13 +1,10 @@
 package com.solvd.gui.pages.mobile;
 
-import com.solvd.gui.components.featuresitems.FeaturesItems;
-import com.solvd.gui.components.header.Header;
 import com.solvd.gui.components.product.Product;
 import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
-import com.solvd.gui.util.MobileContextUtils;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -27,8 +24,6 @@ public class HomePage extends HomePageBase {
         super(driver);
         LOGGER.info("HomePage()");
         this.homePageUrl = configManager.getProperty("url");
-        MobileContextUtils contextUtils = new MobileContextUtils();
-        contextUtils.switchMobileContext(MobileContextUtils.View.CHROMIUM);
     }
 
     @Override
@@ -68,21 +63,9 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public Header getHeader() {
-        LOGGER.info("getHeader()");
-        return getHeader();
-    }
-
-    @Override
     public String getHomePageUrl() {
         LOGGER.info("getHomePageUrl() = " + homePageUrl);
         return homePageUrl;
-    }
-
-    @Override
-    public FeaturesItems getFeaturesItems() {
-        LOGGER.info("getFeaturesItems()");
-        return getFeaturesItems();
     }
 
 }

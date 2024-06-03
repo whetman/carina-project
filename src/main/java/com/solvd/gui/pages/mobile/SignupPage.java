@@ -5,13 +5,12 @@ import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.pages.common.AccountCreatedPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
-import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = SignupPageBase.class)
-public class SignupPage extends SignupPageBase implements IMobileUtils {
+public class SignupPage extends SignupPageBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SignupPage.class);
 
@@ -58,6 +57,5 @@ public class SignupPage extends SignupPageBase implements IMobileUtils {
 
         return initPage(getDriver(), AccountCreatedPageBase.class);
     }
-
 
 }
