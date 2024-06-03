@@ -20,7 +20,7 @@ public class AccountCreatedPage extends AccountCreatedPageBase implements IMobil
     @Override
     public HomePageBase continueAfterAccountCreated() {
         LOGGER.info("continueAfterAccountCreated()");
-        continueButton.click();
+        getContinueButton().click();
         return initPage(getDriver(), HomePageBase.class);
     }
 
