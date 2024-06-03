@@ -43,7 +43,7 @@ public class HomePage extends HomePageBase {
         product.hoverOverProduct(index);
         product.clickAddToCartButton(index);
         product.clickContinueButton();
-        return product.getProductDescription();
+        return product.productDescriptionText();
     }
 
     @Override
