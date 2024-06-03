@@ -32,7 +32,7 @@ public class CartPage extends CartPageBase implements IMobileUtils {
     public String getCartItemDescription(int index) {
         LOGGER.info("getCartItemDescription(" + index + ")");
         List<CartItem> cartItems = getCart().getCartItems();
-        String description = cartItems.get(index).getCartItemsDescription();
+        String description = cartItems.get(index).getCartItemDescription().getText();
         return description;
     }
 
