@@ -18,15 +18,10 @@ public class ProductsPage extends ProductsPageBase {
 
     @Override
     public ProductsPageBase typeInSearchBar(String text) {
-        searchBar.type(text);
-        searchButton.click();
+        LOGGER.info("typeInSearchBar(" + text + ")");
+        getSearchBar().type(text);
+        getSearchButton().click();
         return initPage(ProductsPageBase.class);
-    }
-
-    @Override
-    public FeaturesItems getFeaturesItems() {
-        LOGGER.info("getFeaturesItems()");
-        return getFeaturesItems();
     }
 
 }

@@ -56,7 +56,7 @@ public class HomePage extends HomePageBase {
     @Override
     public void clickGoogleDataAgreementButton() {
         LOGGER.info("clickGoogleDataAgreementButton()");
-        googleDataAgreementButton.click();
+        getGoogleDataAgreementButton().click();
     }
 
     @Override

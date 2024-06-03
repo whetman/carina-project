@@ -4,70 +4,74 @@ import com.solvd.gui.models.AccountInformation;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public abstract class SignupPageBase extends AbstractPageBase {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(SignupPageBase.class);
+
     @FindBy(id = "id_gender1")
-    protected ExtendedWebElement titleMr;
+    private ExtendedWebElement titleMr;
 
     @FindBy(id = "id_gender2")
-    protected ExtendedWebElement titleMrs;
+    private ExtendedWebElement titleMrs;
 
     @FindBy(id = "password")
-    protected ExtendedWebElement passwordBox;
+    private ExtendedWebElement passwordBox;
 
     @FindBy(id = "days")
-    protected ExtendedWebElement daysDropdown;
+    private ExtendedWebElement daysDropdown;
 
     @FindBy(xpath = "//select[@id='days']//option")
-    protected List<ExtendedWebElement> days;
+    private List<ExtendedWebElement> days;
 
     @FindBy(id = "months")
-    protected ExtendedWebElement monthsDropdown;
+    private ExtendedWebElement monthsDropdown;
 
     @FindBy(xpath = "//select[@id='months']//option")
-    protected List<ExtendedWebElement> months;
+    private List<ExtendedWebElement> months;
 
     @FindBy(id = "years")
-    protected ExtendedWebElement yearsDropdown;
+    private ExtendedWebElement yearsDropdown;
 
     @FindBy(xpath = "//select[@id='years']//option")
-    protected List<ExtendedWebElement> years;
+    private List<ExtendedWebElement> years;
 
     @FindBy(id = "first_name")
-    protected ExtendedWebElement firstNameBox;
+    private ExtendedWebElement firstNameBox;
 
     @FindBy(id = "last_name")
-    protected ExtendedWebElement lastnameNameBox;
+    private ExtendedWebElement lastnameNameBox;
 
     @FindBy(id = "address1")
-    protected ExtendedWebElement addressBox;
+    private ExtendedWebElement addressBox;
 
     @FindBy(id = "country")
-    protected ExtendedWebElement countryDropdown;
+    private ExtendedWebElement countryDropdown;
 
     @FindBy(xpath = "//select[@id='country']//option")
-    protected List<ExtendedWebElement> countries;
+    private List<ExtendedWebElement> countries;
 
     @FindBy(id = "state")
-    protected ExtendedWebElement stateBox;
+    private ExtendedWebElement stateBox;
 
     @FindBy(id = "city")
-    protected ExtendedWebElement cityBox;
+    private ExtendedWebElement cityBox;
 
     @FindBy(id = "zipcode")
-    protected ExtendedWebElement zipcodeBox;
+    private ExtendedWebElement zipcodeBox;
 
     @FindBy(id = "mobile_number")
-    protected ExtendedWebElement mobileNumberBox;
+    private ExtendedWebElement mobileNumberBox;
 
     @FindBy(xpath = "//form[contains(@action, 'signup')]//button")
-    protected ExtendedWebElement createAccountButton;
+    private ExtendedWebElement createAccountButton;
 
     @FindBy(xpath = "//div[contains(@class, 'login')]")
-    protected ExtendedWebElement loginForm;
+    private ExtendedWebElement loginForm;
 
     public SignupPageBase(WebDriver driver) {
         super(driver);
@@ -75,4 +79,103 @@ public abstract class SignupPageBase extends AbstractPageBase {
 
     public abstract AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation);
 
+    public ExtendedWebElement getTitleMr() {
+        LOGGER.info("getTitleMr()");
+        return titleMr;
+    }
+
+    public ExtendedWebElement getTitleMrs() {
+        LOGGER.info("getTitleMrs()");
+        return titleMrs;
+    }
+
+    public ExtendedWebElement getPasswordBox() {
+        LOGGER.info("getPasswordBox()");
+        return passwordBox;
+    }
+
+    public ExtendedWebElement getDaysDropdown() {
+        LOGGER.info("getDaysDropdown()");
+        return daysDropdown;
+    }
+
+    public List<ExtendedWebElement> getDays() {
+        LOGGER.info("getDays()");
+        return days;
+    }
+
+    public ExtendedWebElement getMonthsDropdown() {
+        LOGGER.info("getMonthsDropdown()");
+        return monthsDropdown;
+    }
+
+    public List<ExtendedWebElement> getMonths() {
+        LOGGER.info("getMonths()");
+        return months;
+    }
+
+    public ExtendedWebElement getYearsDropdown() {
+        LOGGER.info("getYearsDropdown()");
+        return yearsDropdown;
+    }
+
+    public List<ExtendedWebElement> getYears() {
+        LOGGER.info("getYears()");
+        return years;
+    }
+
+    public ExtendedWebElement getFirstNameBox() {
+        LOGGER.info("getFirstNameBox()");
+        return firstNameBox;
+    }
+
+    public ExtendedWebElement getLastnameNameBox() {
+        LOGGER.info("getLastnameNameBox()");
+        return lastnameNameBox;
+    }
+
+    public ExtendedWebElement getAddressBox() {
+        LOGGER.info("getAddressBox()");
+        return addressBox;
+    }
+
+    public List<ExtendedWebElement> getCountries() {
+        LOGGER.info("getCountries()");
+        return countries;
+    }
+
+    public ExtendedWebElement getCountryDropdown() {
+        LOGGER.info("getCountryDropdown()");
+        return countryDropdown;
+    }
+
+    public ExtendedWebElement getStateBox() {
+        LOGGER.info("getStateBox()");
+        return stateBox;
+    }
+
+    public ExtendedWebElement getCityBox() {
+        LOGGER.info("getCityBox()");
+        return cityBox;
+    }
+
+    public ExtendedWebElement getZipcodeBox() {
+        LOGGER.info("getZipcodeBox()");
+        return zipcodeBox;
+    }
+
+    public ExtendedWebElement getMobileNumberBox() {
+        LOGGER.info("getMobileNumberBox()");
+        return mobileNumberBox;
+    }
+
+    public ExtendedWebElement getCreateAccountButton() {
+        LOGGER.info("getCreateAccountButton()");
+        return createAccountButton;
+    }
+
+    public ExtendedWebElement getLoginForm() {
+        LOGGER.info("getLoginForm()");
+        return loginForm;
+    }
 }

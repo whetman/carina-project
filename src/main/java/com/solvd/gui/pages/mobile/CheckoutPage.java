@@ -20,16 +20,16 @@ public class CheckoutPage extends CheckoutPageBase implements IMobileUtils {
     @Override
     public boolean areAddressesCorrect() {
         LOGGER.info("areAddressesCorrect()");
-        boolean personDetails = checkoutInformation.getAddressBilling().getAddressPersonDetails().getText()
-                .equals(checkoutInformation.getAddressDelivery().getAddressPersonDetails().getText());
-        boolean country = checkoutInformation.getAddressBilling().getAddressCountry().getText()
-                .equals(checkoutInformation.getAddressDelivery().getAddressCountry().getText());
-        boolean phone = checkoutInformation.getAddressBilling().getAddressPhone().getText()
-                .equals(checkoutInformation.getAddressDelivery().getAddressPhone().getText());
-        boolean addressDetails = checkoutInformation.getAddressBilling().getAddressDetails().getText()
-                .equals(checkoutInformation.getAddressDelivery().getAddressDetails().getText());
-        boolean street = checkoutInformation.getAddressBilling().getAddressStreet().getText()
-                .equals(checkoutInformation.getAddressDelivery().getAddressStreet().getText());
+        boolean personDetails = getCheckoutInformation().getAddressBilling().getAddressPersonDetails().getText()
+                .equals(getCheckoutInformation().getAddressDelivery().getAddressPersonDetails().getText());
+        boolean country = getCheckoutInformation().getAddressBilling().getAddressCountry().getText()
+                .equals(getCheckoutInformation().getAddressDelivery().getAddressCountry().getText());
+        boolean phone = getCheckoutInformation().getAddressBilling().getAddressPhone().getText()
+                .equals(getCheckoutInformation().getAddressDelivery().getAddressPhone().getText());
+        boolean addressDetails = getCheckoutInformation().getAddressBilling().getAddressDetails().getText()
+                .equals(getCheckoutInformation().getAddressDelivery().getAddressDetails().getText());
+        boolean street = getCheckoutInformation().getAddressBilling().getAddressStreet().getText()
+                .equals(getCheckoutInformation().getAddressDelivery().getAddressStreet().getText());
 
         return personDetails && country && phone && addressDetails && street;
     }
@@ -37,8 +37,8 @@ public class CheckoutPage extends CheckoutPageBase implements IMobileUtils {
     @Override
     public PaymentPageBase placeOrder() {
         LOGGER.info("placeOrder()");
-        placeOrderButton.scrollTo();
-        placeOrderButton.click();
+        getPlaceOrderButton().scrollTo();
+        getPlaceOrderButton().click();
         return initPage(getDriver(), PaymentPageBase.class);
     }
 

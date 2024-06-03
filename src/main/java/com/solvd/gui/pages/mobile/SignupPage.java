@@ -25,38 +25,39 @@ public class SignupPage extends SignupPageBase implements IMobileUtils {
         LOGGER.info("enterAccountInformation()");
 
         if (accountInformation.getGender().equals(Gender.MRS)) {
-            titleMrs.click();
+            getTitleMrs().click();
         } else {
-            titleMr.click();
+            getTitleMr().click();
         }
 
-        passwordBox.type(accountInformation.getPassword());
+        getPasswordBox().type(accountInformation.getPassword());
 
-        daysDropdown.click();
-        daysDropdown.select(accountInformation.getDayOfBirth());
+        getDaysDropdown().click();
+        getDaysDropdown().select(accountInformation.getDayOfBirth());
 
-        monthsDropdown.click();
-        monthsDropdown.select(accountInformation.getMonthOfBirth());
+        getMonthsDropdown().click();
+        getMonthsDropdown().select(accountInformation.getMonthOfBirth());
 
-        yearsDropdown.click();
-        yearsDropdown.select(accountInformation.getYearOfBirth());
+        getYearsDropdown().click();
+        getYearsDropdown().select(accountInformation.getYearOfBirth());
 
-        firstNameBox.type(accountInformation.getSignupName());
-        lastnameNameBox.type(accountInformation.getLastName());
-        addressBox.type(accountInformation.getAddress());
+        getFirstNameBox().type(accountInformation.getSignupName());
+        getLastnameNameBox().type(accountInformation.getLastName());
+        getAddressBox().type(accountInformation.getAddress());
 
-        countryDropdown.scrollTo();
+        getCountryDropdown().scrollTo();
 
-        countryDropdown.click();
-        countryDropdown.select(accountInformation.getCountry());
+        getCountryDropdown().click();
+        getCountryDropdown().select(accountInformation.getCountry());
 
-        stateBox.type(accountInformation.getState());
-        cityBox.type(accountInformation.getCity());
-        zipcodeBox.type(accountInformation.getZipcode());
-        mobileNumberBox.type(accountInformation.getMobileNumber());
-        createAccountButton.click();
+        getStateBox().type(accountInformation.getState());
+        getCityBox().type(accountInformation.getCity());
+        getZipcodeBox().type(accountInformation.getZipcode());
+        getMobileNumberBox().type(accountInformation.getMobileNumber());
+        getCreateAccountButton().click();
 
         return initPage(getDriver(), AccountCreatedPageBase.class);
     }
+
 
 }

@@ -13,7 +13,7 @@ public abstract class HomePageBase extends AbstractPageBase {
     private static final Logger LOGGER = LoggerFactory.getLogger(HomePageBase.class);
 
     @FindBy(xpath = "(//p[@class='fc-button-label'])[1]")
-    protected ExtendedWebElement googleDataAgreementButton;
+    private ExtendedWebElement googleDataAgreementButton;
 
     public HomePageBase(WebDriver driver) {
         super(driver);
@@ -28,6 +28,11 @@ public abstract class HomePageBase extends AbstractPageBase {
     public abstract void clickGoogleDataAgreementButton();
 
     public abstract HomePageBase login(String email, String password);
+
+    public ExtendedWebElement getGoogleDataAgreementButton() {
+        LOGGER.info("getGoogleDataAgreementButton()");
+        return googleDataAgreementButton;
+    }
 
     @Override
     public void open() {

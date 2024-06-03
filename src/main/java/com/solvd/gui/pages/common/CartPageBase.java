@@ -27,10 +27,12 @@ public abstract class CartPageBase extends AbstractPageBase {
     public abstract String getCartItemQuantity(int index);
 
     public Cart getCart() {
+        LOGGER.info("getCart()");
         return cart;
     }
 
     public ExtendedWebElement getCheckoutButton() {
+        LOGGER.info("getCheckoutButton()");
         return checkoutButton;
     }
 }
