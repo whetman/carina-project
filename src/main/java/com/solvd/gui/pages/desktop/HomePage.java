@@ -32,11 +32,11 @@ public class HomePage extends HomePageBase {
     public String addRandomProductToCart() {
 
         Random rand = new Random();
-        int index = rand.nextInt(featuresItems.getProducts().size());
+        int index = rand.nextInt(getFeaturesItems().getProducts().size());
 
         LOGGER.info("addRandomProductToCart(" + index + ")");
 
-        Product product = featuresItems.getProducts().get(index);
+        Product product = getFeaturesItems().getProducts().get(index);
         product.hoverOverProduct(index);
         product.clickAddToCartButton(index);
         product.clickContinueButton();
@@ -46,7 +46,7 @@ public class HomePage extends HomePageBase {
     @Override
     public CartPageBase goToCart() {
         LOGGER.info("goToCart()");
-        CartPageBase cartPageBase = header.openCartPage();
+        CartPageBase cartPageBase = getHeader().openCartPage();
         return cartPageBase;
     }
 
@@ -59,27 +59,15 @@ public class HomePage extends HomePageBase {
     @Override
     public HomePageBase login(String email, String password) {
         LOGGER.info("login(" + email + ")");
-        SignupLoginPageBase signupLoginPageBase = header.openSignupLoginPage();
+        SignupLoginPageBase signupLoginPageBase = getHeader().openSignupLoginPage();
         HomePageBase loggedHomePage = signupLoginPageBase.login(email, password);
         return loggedHomePage;
-    }
-
-    @Override
-    public Header getHeader() {
-        LOGGER.info("getHeader()");
-        return header;
     }
 
     @Override
     public String getHomePageUrl() {
         LOGGER.info("getHomePageUrl() = " + homePageUrl);
         return homePageUrl;
-    }
-
-    @Override
-    public FeaturesItems getFeaturesItems() {
-        LOGGER.info("getFeaturesItems()");
-        return featuresItems;
     }
 
 }

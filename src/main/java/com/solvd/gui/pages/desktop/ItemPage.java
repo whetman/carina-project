@@ -22,7 +22,7 @@ public class ItemPage extends ItemPageBase {
     public CartPageBase addToCart() {
         addToCartButton.click();
         continueShopping.click();
-        CartPageBase cartPageBase = header.openCartPage();
+        CartPageBase cartPageBase = getHeader().openCartPage();
         return cartPageBase;
     }
 }

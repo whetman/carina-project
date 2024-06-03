@@ -19,11 +19,7 @@ public abstract class HomePageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract HeaderBase getHeader();
-
     public abstract String getHomePageUrl();
-
-    public abstract FeaturesItems getFeaturesItems();
 
     public abstract String addRandomProductToCart();
 

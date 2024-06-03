@@ -26,7 +26,7 @@ public class ProductsPage extends ProductsPageBase {
     @Override
     public FeaturesItems getFeaturesItems() {
         LOGGER.info("getFeaturesItems()");
-        return featuresItems;
+        return getFeaturesItems();
     }
 
 }
