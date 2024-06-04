@@ -34,9 +34,4 @@ public abstract class HomePageBase extends AbstractPageBase {
         return googleDataAgreementButton;
     }
 
-    @Override
-    public void open() {
-        super.open();
-    }
-
 }

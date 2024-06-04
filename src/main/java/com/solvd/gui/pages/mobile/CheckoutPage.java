@@ -3,12 +3,13 @@ package com.solvd.gui.pages.mobile;
 import com.solvd.gui.pages.common.CheckoutPageBase;
 import com.solvd.gui.pages.common.PaymentPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = CheckoutPageBase.class)
-public class CheckoutPage extends CheckoutPageBase {
+public class CheckoutPage extends CheckoutPageBase implements IMobileUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CheckoutPage.class);
 
