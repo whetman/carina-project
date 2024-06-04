@@ -4,7 +4,7 @@
     <test name="UserActionsTests" parallel="classes" thread-count="2">
         <parameter name="browser" value="firefox"/>
         <classes>
-            <class name="com.solvd.web.UserActionsTests"/>
+            <class name="com.solvd.tests.UserActionsTests"/>
         </classes>
     </test>
 </suite>

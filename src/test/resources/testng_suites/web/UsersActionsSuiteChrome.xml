@@ -5,7 +5,7 @@
     <test name="UserActionsTests">
         <parameter name="browser" value="chrome"/>
         <classes>
-            <class name="com.solvd.web.UserActionsTests"/>
+            <class name="com.solvd.tests.UserActionsTests"/>
         </classes>
     </test>
 </suite>
