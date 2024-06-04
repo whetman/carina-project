@@ -33,6 +33,10 @@ public class SignupPage extends SignupPageBase {
         getPasswordBox().scrollTo();
         getPasswordBox().type(accountInformation.getPassword());
 
+//        getDaysDropdown().scrollTo();
+//
+//        waitUntil(visibilityOf(getDaysDropdown()), Duration.ofSeconds(30L));
+
         getDaysDropdown().scrollTo();
         getDaysDropdown().click();
         getDaysDropdown().select(accountInformation.getDayOfBirth());
