@@ -6,6 +6,7 @@ import com.solvd.gui.pages.common.AccountCreatedPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,8 +56,14 @@ public class SignupPage extends SignupPageBase implements IMobileUtils {
         getZipcodeBox().type(accountInformation.getZipcode());
         getMobileNumberBox().type(accountInformation.getMobileNumber());
         getCreateAccountButton().click();
+        getCreateAccountButton().click();
 
         return initPage(getDriver(), AccountCreatedPageBase.class);
     }
 
+    @Override
+    public ExtendedWebElement getEmailAlreadyExistsMessage() {
+        LOGGER.info("getEmailAlreadyExistsMessage()");
+        return emailAlreadyExistsMessage;
+    }
 }

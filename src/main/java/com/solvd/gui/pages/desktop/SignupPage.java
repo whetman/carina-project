@@ -5,6 +5,7 @@ import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.pages.common.AccountCreatedPageBase;
 import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,17 +30,22 @@ public class SignupPage extends SignupPageBase {
             getTitleMr().click();
         }
 
+        getPasswordBox().scrollTo();
         getPasswordBox().type(accountInformation.getPassword());
 
+        getDaysDropdown().scrollTo();
         getDaysDropdown().click();
         getDaysDropdown().select(accountInformation.getDayOfBirth());
 
+        getMonthsDropdown().scrollTo();
         getMonthsDropdown().click();
         getMonthsDropdown().select(accountInformation.getMonthOfBirth());
 
+        getYearsDropdown().scrollTo();
         getYearsDropdown().click();
         getYearsDropdown().select(accountInformation.getYearOfBirth());
 
+        getFirstNameBox().scrollTo();
         getFirstNameBox().type(accountInformation.getSignupName());
         getLastnameNameBox().type(accountInformation.getLastName());
         getAddressBox().type(accountInformation.getAddress());
@@ -58,4 +64,8 @@ public class SignupPage extends SignupPageBase {
         return initPage(getDriver(), AccountCreatedPageBase.class);
     }
 
+    @Override
+    public ExtendedWebElement getEmailAlreadyExistsMessage() {
+        return null;
+    }
 }

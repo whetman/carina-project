@@ -1,4 +1,4 @@
-package com.solvd.web;
+package com.solvd.tests;
 
 import com.solvd.gui.pages.common.HomePageBase;
 import org.slf4j.Logger;

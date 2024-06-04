@@ -4,6 +4,7 @@ import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
+import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class SignupLoginPage extends SignupLoginPageBase implements IMobileUtils
         getNameBar().type(name);
         getEmailSignupBar().type(email);
         getSignupButton().click();
+        getSignupButton().click();
     }
 
     @Override
@@ -34,4 +36,8 @@ public class SignupLoginPage extends SignupLoginPageBase implements IMobileUtils
         return initPage(getDriver(), HomePageBase.class);
     }
 
+    @Override
+    public ExtendedWebElement getEmailAlreadyExistsMessage() {
+        return null;
+    }
 }

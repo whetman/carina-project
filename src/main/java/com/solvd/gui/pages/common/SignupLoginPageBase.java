@@ -31,8 +31,8 @@ public abstract class SignupLoginPageBase extends AbstractPageBase {
     @FindBy(xpath = "//div[contains(@class, 'login')]")
     private ExtendedWebElement loginForm;
 
-    @FindBy(xpath = "//button[@type='submit']/preceding-sibling::p")
-    private ExtendedWebElement emailAlreadyExistsMessage;
+//    @FindBy(xpath = "//button[@type='submit']/preceding-sibling::p")
+//    protected ExtendedWebElement emailAlreadyExistsMessage;
 
     public SignupLoginPageBase(WebDriver driver) {
         super(driver);
@@ -41,6 +41,8 @@ public abstract class SignupLoginPageBase extends AbstractPageBase {
     public abstract void createAccount(String name, String email);
 
     public abstract HomePageBase login(String email, String password);
+
+    public abstract ExtendedWebElement getEmailAlreadyExistsMessage();
 
     public ExtendedWebElement getNameBar() {
         LOGGER.info("getNameBar()");
@@ -77,8 +79,8 @@ public abstract class SignupLoginPageBase extends AbstractPageBase {
         return loginForm;
     }
 
-    public ExtendedWebElement getEmailAlreadyExistsMessage() {
-        LOGGER.info("getEmailAlreadyExistsMessage()");
-        return emailAlreadyExistsMessage;
-    }
+//    public ExtendedWebElement getEmailAlreadyExistsMessage() {
+//        LOGGER.info("getEmailAlreadyExistsMessage()");
+//        return emailAlreadyExistsMessage;
+//    }
 }

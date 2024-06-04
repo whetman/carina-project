@@ -79,6 +79,8 @@ public abstract class SignupPageBase extends AbstractPageBase {
 
     public abstract AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation);
 
+    public abstract ExtendedWebElement getEmailAlreadyExistsMessage();
+
     public ExtendedWebElement getTitleMr() {
         LOGGER.info("getTitleMr()");
         return titleMr;
