@@ -30,17 +30,22 @@ public class SignupPage extends SignupPageBase {
             getTitleMr().click();
         }
 
+        getPasswordBox().scrollTo();
         getPasswordBox().type(accountInformation.getPassword());
 
+        getDaysDropdown().scrollTo();
         getDaysDropdown().click();
         getDaysDropdown().select(accountInformation.getDayOfBirth());
 
+        getMonthsDropdown().scrollTo();
         getMonthsDropdown().click();
         getMonthsDropdown().select(accountInformation.getMonthOfBirth());
 
+        getYearsDropdown().scrollTo();
         getYearsDropdown().click();
         getYearsDropdown().select(accountInformation.getYearOfBirth());
 
+        getFirstNameBox().scrollTo();
         getFirstNameBox().type(accountInformation.getSignupName());
         getLastnameNameBox().type(accountInformation.getLastName());
         getAddressBox().type(accountInformation.getAddress());

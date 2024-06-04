@@ -12,9 +12,9 @@ import org.testng.asserts.SoftAssert;
 
 import static org.testng.Assert.assertTrue;
 
-public class MobileUserActionsTests extends AbstractTest {
+public class MobileSignupTest extends AbstractTest {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MobileUserActionsTests.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MobileSignupTest.class);
 
     @DataProvider(name = "newAccountData")
     public Object[][] createAccountData() {

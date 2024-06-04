@@ -4,10 +4,14 @@ import com.solvd.gui.components.cart.CartItem;
 import com.solvd.gui.components.featuresitems.FeaturesItems;
 import com.solvd.gui.components.header.HeaderBase;
 import com.solvd.gui.components.product.Product;
+import com.solvd.gui.constants.Gender;
+import com.solvd.gui.constants.ProductItems;
+import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
 import com.solvd.gui.pages.common.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -21,6 +25,35 @@ import static org.testng.Assert.assertTrue;
 public class UserActionsTests extends AbstractTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserActionsTests.class);
+
+    @DataProvider(name = "newAccountData", parallel = true)
+    public Object[][] createAccountData() {
+        return new Object[][]{
+                {new AccountInformation("Wiktoria", "wiktoria999@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                //{new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                //{new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                //{new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+        };
+    }
+
+    @DataProvider(name = "accountData", parallel = true)
+    public Object[][] loginData() {
+        return new Object[][]{
+                {"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
+                {"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
+                {"wiktoria999@email.com", "password1", new PaymentInformation("Wik wik", "777888999555", "002", "10", "2080")},
+        };
+    }
+
+    @DataProvider(name = "searchData", parallel = true)
+    public Object[][] searchData() {
+        return new Object[][]{
+                {ProductItems.SHIRT.getValue()},
+                {ProductItems.SKIRT.getValue()},
+                {ProductItems.DRESS.getValue()},
+                {ProductItems.BOOK.getValue()}
+        };
+    }
 
     @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
     public void verifyAddingProductsAndBuying(String email, String password, PaymentInformation paymentInformation) {
