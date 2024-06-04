@@ -7,10 +7,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Parameters;
+import org.testng.annotations.*;
 
 public abstract class AbstractTest implements IAbstractTest {
 
@@ -45,7 +42,7 @@ public abstract class AbstractTest implements IAbstractTest {
         R.CONFIG.put("capabilities.browserName", browser);
     }
 
-    @AfterTest
+    @AfterClass
     public void tearDown() {
         if (driver != null) {
             driver.quit();
