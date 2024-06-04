@@ -6,6 +6,7 @@ import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
+import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +14,7 @@ import org.slf4j.LoggerFactory;
 import java.util.Random;
 
 @DeviceType(pageType = DeviceType.Type.ANDROID_PHONE, parentClass = HomePageBase.class)
-public class HomePage extends HomePageBase {
+public class HomePage extends HomePageBase implements IMobileUtils {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(HomePage.class);
 

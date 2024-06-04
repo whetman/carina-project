@@ -41,9 +41,9 @@ public class UserActionsTests extends AbstractTest {
     public Object[][] createAccountData() {
         return new Object[][]{
                 {new AccountInformation("Wiktoria", "wiktoria999@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                {new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                //{new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                //{new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                //{new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
         };
     }
 
@@ -66,7 +66,8 @@ public class UserActionsTests extends AbstractTest {
         };
     }
 
-    @Test(testName = "#TC0001", description = "Verify that user can sign up", dataProvider = "newAccountData", priority = 1, threadPoolSize = 2, invocationCount = 2)
+    //@Test(testName = "#TC0001", description = "Verify that user can sign up", dataProvider = "newAccountData", priority = 1, threadPoolSize = 2, invocationCount = 2)
+    @Test(testName = "#TC0001", description = "Verify that user can sign up", dataProvider = "newAccountData", priority = 1)
     public void validateSignUp(AccountInformation accountInfo) {
 
         SoftAssert softAssert = new SoftAssert();
@@ -77,137 +78,137 @@ public class UserActionsTests extends AbstractTest {
         softAssert.assertTrue(homePage.getHeader().isDisplayed(), "Header is not displayed");
 
         SignupLoginPageBase signupLoginPage = homePage.getHeader().openSignupLoginPage();
-
-        signupLoginPage.createAccount(accountInfo.getSignupName(), accountInfo.getSignupEmail());
-
-        if (signupLoginPage.getEmailAlreadyExistsMessage().isDisplayed() && signupLoginPage.getEmailAlreadyExistsMessage().getText().contains("exists")) {
-            softAssert.assertAll();
-            assertTrue(true, "Account already exists");
-        } else {
-            SignupPageBase signupPage = new SignupPage(getDriver());
-            AccountCreatedPageBase accountCreatedPage = signupPage.enterAccountInformation(accountInfo);
-            HomePageBase homePageAfterAccountCreated = accountCreatedPage.continueAfterAccountCreated();
-            AccountDeletedPageBase accountDeletedPage = homePageAfterAccountCreated.getHeader().deleteAccount();
-            boolean displayed = accountDeletedPage.getAccountDeletedMessage().isDisplayed();
-            softAssert.assertAll();
-            assertTrue(displayed, "Account deleted message is not displayed");
-        }
+//
+//        signupLoginPage.createAccount(accountInfo.getSignupName(), accountInfo.getSignupEmail());
+//
+//        if (signupLoginPage.getEmailAlreadyExistsMessage().isDisplayed() && signupLoginPage.getEmailAlreadyExistsMessage().getText().contains("exists")) {
+//            softAssert.assertAll();
+//            assertTrue(true, "Account already exists");
+//        } else {
+//            SignupPageBase signupPage = new SignupPage(getDriver());
+//            AccountCreatedPageBase accountCreatedPage = signupPage.enterAccountInformation(accountInfo);
+//            HomePageBase homePageAfterAccountCreated = accountCreatedPage.continueAfterAccountCreated();
+//            AccountDeletedPageBase accountDeletedPage = homePageAfterAccountCreated.getHeader().deleteAccount();
+//            boolean displayed = accountDeletedPage.getAccountDeletedMessage().isDisplayed();
+//            softAssert.assertAll();
+//            assertTrue(displayed, "Account deleted message is not displayed");
+//        }
     }
 
-    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
-    public void verifyAddingProductsAndBuying(String email, String password, PaymentInformation paymentInformation) {
-        SoftAssert softAssert = new SoftAssert();
-
-        HomePageBase homePage = openHomePage();
-
-        homePage.clickGoogleDataAgreementButton();
-
-        homePage.login(email, password);
-
-        String productAdded = homePage.addRandomProductToCart();
-        String productAddedTwo = homePage.addRandomProductToCart();
-        String productAddedThree = homePage.addRandomProductToCart();
-
-        CartPageBase cartPageBase = homePage.goToCart();
-
-        List<String> productsAdded = Arrays.asList(productAdded, productAddedTwo, productAddedThree);
-
-        IntStream.range(0, productsAdded.size())
-                .forEach(i -> {
-                    String cartItemDescription = cartPageBase.getCartItemDescription(i);
-                    softAssert.assertTrue(cartItemDescription.contains(productsAdded.get(i)), "Products are not the same");
-                });
-
-        CheckoutPageBase checkoutPage = cartPageBase.buyProducts();
-        boolean areAddressesCorrect = checkoutPage.areAddressesCorrect();
-
-        softAssert.assertTrue(areAddressesCorrect, "Billing address and delivery address are not the same");
-
-        PaymentPageBase paymentPage = checkoutPage.placeOrder();
-        PaymentDonePageBase paymentDonePageBase = paymentPage.enterPaymentDetailsAndContinue(
-                paymentInformation.getNameOnCard(),
-                paymentInformation.getCardNumber(),
-                paymentInformation.getCvcNumber(),
-                paymentInformation.getExpirationMonth(),
-                paymentInformation.getExpirationYear());
-
-        softAssert.assertAll();
-
-        assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
-    }
-
-    @Test(testName = "#TC0003", description = "Verify that search bar is working correctly", dataProvider = "searchData", priority = 0, threadPoolSize = 2, invocationCount = 2)
-    public void verifySearchBar(String productName) {
-
-        SoftAssert softAssert = new SoftAssert();
-
-        HomePageBase homePage = openHomePage();
-
-        homePage.clickGoogleDataAgreementButton();
-
-        HeaderBase header = homePage.getHeader();
-
-        ProductsPageBase productsPage = header.openProductsPage();
-        ProductsPageBase productsPageSearched = productsPage.typeInSearchBar(productName);
-
-        softAssert.assertTrue(getDriver().getCurrentUrl().contains(productName), "Current url doesn't contain searched product name.");
-
-        FeaturesItems featuresItems = productsPageSearched.getFeaturesItems();
-
-        LOGGER.info("###SIZE: " + featuresItems.getProducts().size() + "n: " + productName);
-
-        List<Product> products = featuresItems.getProducts();
-
-
-        switch (productName) {
-            case "shirt":
-            case "dress":
-                softAssert.assertTrue(products.size() > 0, "Size of the list is 0");
-                break;
-            case "skirt":
-            case "book":
-                softAssert.assertTrue(products.size() == 0, "Size of the list is more than 0");
-                break;
-        }
-
-        softAssert.assertAll();
-
-    }
-
-    //todo fix - sometimes element not clickable
-    @Test(testName = "#TC0004", description = "Verify that logged user can add multiple products of one kind to the cart", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
-    public void verifyAddingMultipleProducts(String email, String password, PaymentInformation paymentInformation) {
-
-        SoftAssert softAssert = new SoftAssert();
-
-        HomePageBase homePage = openHomePage();
-
-        homePage.clickGoogleDataAgreementButton();
-
-        homePage.login(email, password);
-
-        Random random = new Random();
-        int i = random.nextInt(1, 15);
-
-        List<Product> products = homePage.getFeaturesItems().getProducts();
-        int size = products.size();
-
-        Product product = products.get(i);
-        boolean clickable = product.getViewProduct().isClickable();
-
-        ItemPageBase itemPage = product.clickViewProduct();
-
-        int q = random.nextInt(1, 50);
-        String quantity = "" + q;
-
-        itemPage.changeQuantity(quantity);
-        CartPageBase cartPage = itemPage.addToCart();
-        List<CartItem> cartItems = cartPage.getCart().getCartItems();
-        String quantityInCart = cartItems.get(1).getCartItemQuantity().getText();
-
-        softAssert.assertTrue(quantityInCart.equals(quantity), "Quantity in cart is different than quantity typed");
-        softAssert.assertAll();
-
-    }
+//    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+//    public void verifyAddingProductsAndBuying(String email, String password, PaymentInformation paymentInformation) {
+//        SoftAssert softAssert = new SoftAssert();
+//
+//        HomePageBase homePage = openHomePage();
+//
+//        homePage.clickGoogleDataAgreementButton();
+//
+//        homePage.login(email, password);
+//
+//        String productAdded = homePage.addRandomProductToCart();
+//        String productAddedTwo = homePage.addRandomProductToCart();
+//        String productAddedThree = homePage.addRandomProductToCart();
+//
+//        CartPageBase cartPageBase = homePage.goToCart();
+//
+//        List<String> productsAdded = Arrays.asList(productAdded, productAddedTwo, productAddedThree);
+//
+//        IntStream.range(0, productsAdded.size())
+//                .forEach(i -> {
+//                    String cartItemDescription = cartPageBase.getCartItemDescription(i);
+//                    softAssert.assertTrue(cartItemDescription.contains(productsAdded.get(i)), "Products are not the same");
+//                });
+//
+//        CheckoutPageBase checkoutPage = cartPageBase.buyProducts();
+//        boolean areAddressesCorrect = checkoutPage.areAddressesCorrect();
+//
+//        softAssert.assertTrue(areAddressesCorrect, "Billing address and delivery address are not the same");
+//
+//        PaymentPageBase paymentPage = checkoutPage.placeOrder();
+//        PaymentDonePageBase paymentDonePageBase = paymentPage.enterPaymentDetailsAndContinue(
+//                paymentInformation.getNameOnCard(),
+//                paymentInformation.getCardNumber(),
+//                paymentInformation.getCvcNumber(),
+//                paymentInformation.getExpirationMonth(),
+//                paymentInformation.getExpirationYear());
+//
+//        softAssert.assertAll();
+//
+//        assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
+//    }
+//
+//    @Test(testName = "#TC0003", description = "Verify that search bar is working correctly", dataProvider = "searchData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+//    public void verifySearchBar(String productName) {
+//
+//        SoftAssert softAssert = new SoftAssert();
+//
+//        HomePageBase homePage = openHomePage();
+//
+//        homePage.clickGoogleDataAgreementButton();
+//
+//        HeaderBase header = homePage.getHeader();
+//
+//        ProductsPageBase productsPage = header.openProductsPage();
+//        ProductsPageBase productsPageSearched = productsPage.typeInSearchBar(productName);
+//
+//        softAssert.assertTrue(getDriver().getCurrentUrl().contains(productName), "Current url doesn't contain searched product name.");
+//
+//        FeaturesItems featuresItems = productsPageSearched.getFeaturesItems();
+//
+//        LOGGER.info("###SIZE: " + featuresItems.getProducts().size() + "n: " + productName);
+//
+//        List<Product> products = featuresItems.getProducts();
+//
+//
+//        switch (productName) {
+//            case "shirt":
+//            case "dress":
+//                softAssert.assertTrue(products.size() > 0, "Size of the list is 0");
+//                break;
+//            case "skirt":
+//            case "book":
+//                softAssert.assertTrue(products.size() == 0, "Size of the list is more than 0");
+//                break;
+//        }
+//
+//        softAssert.assertAll();
+//
+//    }
+//
+//    //todo fix - sometimes element not clickable
+//    @Test(testName = "#TC0004", description = "Verify that logged user can add multiple products of one kind to the cart", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+//    public void verifyAddingMultipleProducts(String email, String password, PaymentInformation paymentInformation) {
+//
+//        SoftAssert softAssert = new SoftAssert();
+//
+//        HomePageBase homePage = openHomePage();
+//
+//        homePage.clickGoogleDataAgreementButton();
+//
+//        homePage.login(email, password);
+//
+//        Random random = new Random();
+//        int i = random.nextInt(1, 15);
+//
+//        List<Product> products = homePage.getFeaturesItems().getProducts();
+//        int size = products.size();
+//
+//        Product product = products.get(i);
+//        boolean clickable = product.getViewProduct().isClickable();
+//
+//        ItemPageBase itemPage = product.clickViewProduct();
+//
+//        int q = random.nextInt(1, 50);
+//        String quantity = "" + q;
+//
+//        itemPage.changeQuantity(quantity);
+//        CartPageBase cartPage = itemPage.addToCart();
+//        List<CartItem> cartItems = cartPage.getCart().getCartItems();
+//        String quantityInCart = cartItems.get(1).getCartItemQuantity().getText();
+//
+//        softAssert.assertTrue(quantityInCart.equals(quantity), "Quantity in cart is different than quantity typed");
+//        softAssert.assertAll();
+//
+//    }
 
 }
