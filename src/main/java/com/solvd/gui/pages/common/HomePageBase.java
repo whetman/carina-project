@@ -1,7 +1,5 @@
 package com.solvd.gui.pages.common;
 
-import com.solvd.gui.components.featuresitems.FeaturesItems;
-import com.solvd.gui.components.header.HeaderBase;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -22,6 +20,8 @@ public abstract class HomePageBase extends AbstractPageBase {
     public abstract String getHomePageUrl();
 
     public abstract String addRandomProductToCart();
+
+    public abstract ItemPageBase viewRandomProductInformation();
 
     public abstract CartPageBase goToCart();
 

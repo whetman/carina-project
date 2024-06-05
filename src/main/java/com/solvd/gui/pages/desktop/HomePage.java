@@ -4,6 +4,7 @@ import com.solvd.gui.components.product.Product;
 import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
+import com.solvd.gui.pages.common.ItemPageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
@@ -39,6 +40,17 @@ public class HomePage extends HomePageBase {
         product.clickAddToCartButton(index);
         product.clickContinueButton();
         return product.productDescriptionText();
+    }
+
+    @Override
+    public ItemPageBase viewRandomProductInformation() {
+        LOGGER.info("viewProductInformation()");
+        Random rand = new Random();
+        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+
+        ItemPageBase itemPage = getFeaturesItems().getProducts().get(index).clickViewProduct();
+
+        return itemPage;
     }
 
     @Override

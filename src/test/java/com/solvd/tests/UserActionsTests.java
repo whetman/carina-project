@@ -74,15 +74,11 @@ public class UserActionsTests extends AbstractTest {
         signupLoginPage.createAccount(accountInfo.getSignupName(), accountInfo.getSignupEmail());
 
         SignupPageBase signupPage = new SignupPage(getDriver());
-        boolean visible = signupPage.getEmailAlreadyExistsMessage().isVisible();
-        LOGGER.info("@@@@@: " + signupPage.getEmailAlreadyExistsMessage().getText());
 
         if (signupPage.getEmailAlreadyExistsMessage().isVisible() && signupPage.getEmailAlreadyExistsMessage().getText().contains("exist")) {
-            LOGGER.info("ENTERED THE 1 LOOP FOR ANDROID");
             softAssert.assertAll();
             assertTrue(true, "Account already exists");
         } else {
-            LOGGER.info("ENTERED THE 2 LOOP FOR ANDROID");
             AccountCreatedPageBase accountCreatedPage = signupPage.enterAccountInformation(accountInfo);
             HomePageBase homePageAfterAccountCreated = accountCreatedPage.continueAfterAccountCreated();
             AccountDeletedPageBase accountDeletedPage = homePageAfterAccountCreated.getHeader().deleteAccount();
@@ -134,7 +130,7 @@ public class UserActionsTests extends AbstractTest {
         assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
     }
 
-    @Test(testName = "#TC0003", description = "Verify that search bar is working correctly", dataProvider = "searchData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+    @Test(testName = "#TC0003", description = "Verify that search bar is working correctly", dataProvider = "searchData", priority = 0)
     public void verifySearchBar(String productName) {
 
         SoftAssert softAssert = new SoftAssert();
@@ -152,10 +148,7 @@ public class UserActionsTests extends AbstractTest {
 
         FeaturesItems featuresItems = productsPageSearched.getFeaturesItems();
 
-        LOGGER.info("###SIZE: " + featuresItems.getProducts().size() + "n: " + productName);
-
         List<Product> products = featuresItems.getProducts();
-
 
         switch (productName) {
             case "shirt":
@@ -172,7 +165,7 @@ public class UserActionsTests extends AbstractTest {
 
     }
 
-    //todo fix - sometimes element not clickable
+    //todo fix - iframe advertisement
     @Test(testName = "#TC0004", description = "Verify that logged user can add multiple products of one kind to the cart", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
     public void verifyAddingMultipleProducts(String email, String password, PaymentInformation paymentInformation) {
 
@@ -184,21 +177,14 @@ public class UserActionsTests extends AbstractTest {
 
         homePage.login(email, password);
 
+        ItemPageBase itemPage = homePage.viewRandomProductInformation();
+
         Random random = new Random();
-        int i = random.nextInt(1, 15);
-
-        List<Product> products = homePage.getFeaturesItems().getProducts();
-        int size = products.size();
-
-        Product product = products.get(i);
-        boolean clickable = product.getViewProduct().isClickable();
-
-        ItemPageBase itemPage = product.clickViewProduct();
-
         int q = random.nextInt(1, 50);
         String quantity = "" + q;
 
         itemPage.changeQuantity(quantity);
+
         CartPageBase cartPage = itemPage.addToCart();
         List<CartItem> cartItems = cartPage.getCart().getCartItems();
         String quantityInCart = cartItems.get(1).getCartItemQuantity().getText();
