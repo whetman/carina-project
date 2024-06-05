@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class ItemPageBase extends AbstractPageBase{
+public abstract class ItemPageBase extends AbstractPageBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ItemPageBase.class);
 
@@ -24,6 +24,7 @@ public abstract class ItemPageBase extends AbstractPageBase{
     }
 
     public abstract void changeQuantity(String quantity);
+
     public abstract CartPageBase addToCart();
 
     public ExtendedWebElement getQuantityField() {

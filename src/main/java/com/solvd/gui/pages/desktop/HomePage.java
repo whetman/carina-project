@@ -1,7 +1,5 @@
 package com.solvd.gui.pages.desktop;
 
-import com.solvd.gui.components.featuresitems.FeaturesItems;
-import com.solvd.gui.components.header.Header;
 import com.solvd.gui.components.product.Product;
 import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;

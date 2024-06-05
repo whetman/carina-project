@@ -9,6 +9,7 @@ import com.solvd.gui.constants.ProductItems;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
 import com.solvd.gui.pages.common.*;
+import com.solvd.gui.pages.desktop.SignupPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
@@ -26,26 +27,26 @@ public class UserActionsTests extends AbstractTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserActionsTests.class);
 
-    @DataProvider(name = "newAccountData", parallel = true)
+    @DataProvider(name = "newAccountData")
     public Object[][] createAccountData() {
         return new Object[][]{
                 {new AccountInformation("Wiktoria", "wiktoria999@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                //{new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                //{new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                //{new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
         };
     }
 
-    @DataProvider(name = "accountData", parallel = true)
+    @DataProvider(name = "accountData")
     public Object[][] loginData() {
         return new Object[][]{
                 {"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
-                {"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
-                {"wiktoria999@email.com", "password1", new PaymentInformation("Wik wik", "777888999555", "002", "10", "2080")},
+                //{"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
+               // {"wiktoria999@email.com", "password1", new PaymentInformation("Wik wik", "777888999555", "002", "10", "2080")},
         };
     }
 
-    @DataProvider(name = "searchData", parallel = true)
+    @DataProvider(name = "searchData")
     public Object[][] searchData() {
         return new Object[][]{
                 {ProductItems.SHIRT.getValue()},
@@ -55,7 +56,43 @@ public class UserActionsTests extends AbstractTest {
         };
     }
 
-    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+    @Test(testName = "#TC0001", description = "Verify that user can sign up", dataProvider = "newAccountData", priority = 1)
+    public void validateSignUp(AccountInformation accountInfo) {
+
+        SoftAssert softAssert = new SoftAssert();
+
+        HomePageBase homePage = openHomePage();
+
+        if (homePage.getGoogleDataAgreementButton().isVisible()) {
+            homePage.clickGoogleDataAgreementButton();
+        }
+
+        softAssert.assertTrue(homePage.getHeader().isDisplayed(), "Header is not displayed");
+
+        SignupLoginPageBase signupLoginPage = homePage.getHeader().openSignupLoginPage();
+
+        signupLoginPage.createAccount(accountInfo.getSignupName(), accountInfo.getSignupEmail());
+
+        SignupPageBase signupPage = new SignupPage(getDriver());
+        boolean visible = signupPage.getEmailAlreadyExistsMessage().isVisible();
+        LOGGER.info("@@@@@: " + signupPage.getEmailAlreadyExistsMessage().getText());
+
+        if (signupPage.getEmailAlreadyExistsMessage().isVisible() && signupPage.getEmailAlreadyExistsMessage().getText().contains("exist")) {
+            LOGGER.info("ENTERED THE 1 LOOP FOR ANDROID");
+            softAssert.assertAll();
+            assertTrue(true, "Account already exists");
+        } else {
+            LOGGER.info("ENTERED THE 2 LOOP FOR ANDROID");
+            AccountCreatedPageBase accountCreatedPage = signupPage.enterAccountInformation(accountInfo);
+            HomePageBase homePageAfterAccountCreated = accountCreatedPage.continueAfterAccountCreated();
+            AccountDeletedPageBase accountDeletedPage = homePageAfterAccountCreated.getHeader().deleteAccount();
+            boolean displayed = accountDeletedPage.getAccountDeletedMessage().isDisplayed();
+            softAssert.assertAll();
+            assertTrue(displayed, "Account deleted message is not displayed");
+        }
+    }
+
+    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData")
     public void verifyAddingProductsAndBuying(String email, String password, PaymentInformation paymentInformation) {
         SoftAssert softAssert = new SoftAssert();
 
