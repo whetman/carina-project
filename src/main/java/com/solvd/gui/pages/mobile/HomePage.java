@@ -36,7 +36,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         LOGGER.info("addRandomProductToCart(" + index + ")");
 
         Product product = getFeaturesItems().getProducts().get(index);
-        product.hoverOverProduct(index);
+        product.click();
         product.clickAddToCartButton(index);
         product.clickContinueButton();
         return product.productDescriptionText();
@@ -44,14 +44,15 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @Override
     public CartPageBase goToCart() {
-        LOGGER.info("goToCart()");
+        LOGGER.info("goToCart() MOBILE");
+        getHeader().scrollTo();
         CartPageBase cartPageBase = getHeader().openCartPage();
         return cartPageBase;
     }
 
     @Override
     public void clickGoogleDataAgreementButton() {
-        LOGGER.info("clickGoogleDataAgreementButton()");
+        LOGGER.info("clickGoogleDataAgreementButton() MOBILE");
         getGoogleDataAgreementButton().click();
     }
 

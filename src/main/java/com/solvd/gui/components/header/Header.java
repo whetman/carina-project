@@ -9,6 +9,10 @@ import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.time.Duration;
+
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOf;
+
 public class Header extends HeaderBase {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Header.class);
@@ -27,6 +31,8 @@ public class Header extends HeaderBase {
     @Override
     public CartPageBase openCartPage() {
         LOGGER.info("openCartPage()");
+//        ExpectedConditions
+        waitUntil(visibilityOf(getCartButton()), Duration.ofSeconds(30L));
         getCartButton().click();
         return initPage(getDriver(), CartPageBase.class);
     }
