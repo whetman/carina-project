@@ -187,6 +187,8 @@ public class UserActionsTests extends AbstractTest {
 
         CartPageBase cartPage = itemPage.addToCart();
         List<CartItem> cartItems = cartPage.getCart().getCartItems();
+
+        //todo fix not to be hardcoded
         String quantityInCart = cartItems.get(1).getCartItemQuantity().getText();
 
         softAssert.assertTrue(quantityInCart.equals(quantity), "Quantity in cart is different than quantity typed");
