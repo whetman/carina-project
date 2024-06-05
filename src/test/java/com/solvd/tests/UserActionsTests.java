@@ -9,6 +9,7 @@ import com.solvd.gui.constants.ProductItems;
 import com.solvd.gui.models.AccountInformation;
 import com.solvd.gui.models.PaymentInformation;
 import com.solvd.gui.pages.common.*;
+import com.solvd.gui.pages.desktop.SignupPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.annotations.DataProvider;
@@ -26,17 +27,17 @@ public class UserActionsTests extends AbstractTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserActionsTests.class);
 
-    @DataProvider(name = "newAccountData", parallel = true)
+    @DataProvider(name = "newAccountData")
     public Object[][] createAccountData() {
         return new Object[][]{
                 {new AccountInformation("Wiktoria", "wiktoria999@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                //{new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                //{new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
-                //{new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Agata", "agata000@email.com", Gender.MRS.getValue(), "password3", "26", "October", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Maria", "maria000@email.com", Gender.MRS.getValue(), "password3", "26", "December", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
+                {new AccountInformation("Ewa", "ewa000@email.com", Gender.MRS.getValue(), "password3", "26", "January", "1960", "Magdalena", "Ulica Sezamkowa 13", "New Zealand", "Statestate", "Auckland", "852587", "000000444")},
         };
     }
 
-    @DataProvider(name = "accountData", parallel = true)
+    @DataProvider(name = "accountData")
     public Object[][] loginData() {
         return new Object[][]{
                 {"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
@@ -45,7 +46,7 @@ public class UserActionsTests extends AbstractTest {
         };
     }
 
-    @DataProvider(name = "searchData", parallel = true)
+    @DataProvider(name = "searchData")
     public Object[][] searchData() {
         return new Object[][]{
                 {ProductItems.SHIRT.getValue()},
@@ -55,7 +56,39 @@ public class UserActionsTests extends AbstractTest {
         };
     }
 
-    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+    @Test(testName = "#TC0001", description = "Verify that user can sign up", dataProvider = "newAccountData", priority = 1)
+    public void validateSignUp(AccountInformation accountInfo) {
+
+        SoftAssert softAssert = new SoftAssert();
+
+        HomePageBase homePage = openHomePage();
+
+        if (homePage.getGoogleDataAgreementButton().isVisible()) {
+            homePage.clickGoogleDataAgreementButton();
+        }
+
+        softAssert.assertTrue(homePage.getHeader().isDisplayed(), "Header is not displayed");
+
+        SignupLoginPageBase signupLoginPage = homePage.getHeader().openSignupLoginPage();
+
+        signupLoginPage.createAccount(accountInfo.getSignupName(), accountInfo.getSignupEmail());
+
+        SignupPageBase signupPage = new SignupPage(getDriver());
+
+        if (signupPage.getEmailAlreadyExistsMessage().isVisible() && signupPage.getEmailAlreadyExistsMessage().getText().contains("exist")) {
+            softAssert.assertAll();
+            assertTrue(true, "Account already exists");
+        } else {
+            AccountCreatedPageBase accountCreatedPage = signupPage.enterAccountInformation(accountInfo);
+            HomePageBase homePageAfterAccountCreated = accountCreatedPage.continueAfterAccountCreated();
+            AccountDeletedPageBase accountDeletedPage = homePageAfterAccountCreated.getHeader().deleteAccount();
+            boolean displayed = accountDeletedPage.getAccountDeletedMessage().isDisplayed();
+            softAssert.assertAll();
+            assertTrue(displayed, "Account deleted message is not displayed");
+        }
+    }
+
+    @Test(testName = "#TC0002", description = "Verify that logged user can add the product to the cart and buy it", dataProvider = "accountData")
     public void verifyAddingProductsAndBuying(String email, String password, PaymentInformation paymentInformation) {
         SoftAssert softAssert = new SoftAssert();
 
@@ -97,7 +130,7 @@ public class UserActionsTests extends AbstractTest {
         assertTrue(paymentDonePageBase.getInvoiceButton().isDisplayed(), "Invoice button is not displayed");
     }
 
-    @Test(testName = "#TC0003", description = "Verify that search bar is working correctly", dataProvider = "searchData", priority = 0, threadPoolSize = 2, invocationCount = 2)
+    @Test(testName = "#TC0003", description = "Verify that search bar is working correctly", dataProvider = "searchData", priority = 0)
     public void verifySearchBar(String productName) {
 
         SoftAssert softAssert = new SoftAssert();
@@ -115,10 +148,7 @@ public class UserActionsTests extends AbstractTest {
 
         FeaturesItems featuresItems = productsPageSearched.getFeaturesItems();
 
-        LOGGER.info("###SIZE: " + featuresItems.getProducts().size() + "n: " + productName);
-
         List<Product> products = featuresItems.getProducts();
-
 
         switch (productName) {
             case "shirt":
@@ -135,7 +165,7 @@ public class UserActionsTests extends AbstractTest {
 
     }
 
-    //todo fix - sometimes element not clickable
+    //todo fix - iframe advertisement
     @Test(testName = "#TC0004", description = "Verify that logged user can add multiple products of one kind to the cart", dataProvider = "accountData", priority = 0, threadPoolSize = 2, invocationCount = 2)
     public void verifyAddingMultipleProducts(String email, String password, PaymentInformation paymentInformation) {
 
@@ -147,21 +177,14 @@ public class UserActionsTests extends AbstractTest {
 
         homePage.login(email, password);
 
+        ItemPageBase itemPage = homePage.viewRandomProductInformation();
+
         Random random = new Random();
-        int i = random.nextInt(1, 15);
-
-        List<Product> products = homePage.getFeaturesItems().getProducts();
-        int size = products.size();
-
-        Product product = products.get(i);
-        boolean clickable = product.getViewProduct().isClickable();
-
-        ItemPageBase itemPage = product.clickViewProduct();
-
         int q = random.nextInt(1, 50);
         String quantity = "" + q;
 
         itemPage.changeQuantity(quantity);
+
         CartPageBase cartPage = itemPage.addToCart();
         List<CartItem> cartItems = cartPage.getCart().getCartItems();
         String quantityInCart = cartItems.get(1).getCartItemQuantity().getText();

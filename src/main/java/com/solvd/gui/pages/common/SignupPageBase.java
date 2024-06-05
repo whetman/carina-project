@@ -73,13 +73,16 @@ public abstract class SignupPageBase extends AbstractPageBase {
     @FindBy(xpath = "//div[contains(@class, 'login')]")
     private ExtendedWebElement loginForm;
 
+    @FindBy(xpath = "//button[@type='submit']/preceding-sibling::p")
+    private ExtendedWebElement emailAlreadyExistsMessage;
+
     public SignupPageBase(WebDriver driver) {
         super(driver);
     }
 
     public abstract AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation);
 
-    public abstract ExtendedWebElement getEmailAlreadyExistsMessage();
+    //public abstract ExtendedWebElement getEmailAlreadyExistsMessage();
 
     public ExtendedWebElement getTitleMr() {
         LOGGER.info("getTitleMr()");
@@ -179,5 +182,9 @@ public abstract class SignupPageBase extends AbstractPageBase {
     public ExtendedWebElement getLoginForm() {
         LOGGER.info("getLoginForm()");
         return loginForm;
+    }
+
+    public ExtendedWebElement getEmailAlreadyExistsMessage() {
+        return emailAlreadyExistsMessage;
     }
 }

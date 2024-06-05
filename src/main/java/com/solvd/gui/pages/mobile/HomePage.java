@@ -4,6 +4,7 @@ import com.solvd.gui.components.product.Product;
 import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
+import com.solvd.gui.pages.common.ItemPageBase;
 import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
@@ -36,7 +37,7 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         LOGGER.info("addRandomProductToCart(" + index + ")");
 
         Product product = getFeaturesItems().getProducts().get(index);
-        product.hoverOverProduct(index);
+        product.click();
         product.clickAddToCartButton(index);
         product.clickContinueButton();
         return product.productDescriptionText();
@@ -44,14 +45,15 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @Override
     public CartPageBase goToCart() {
-        LOGGER.info("goToCart()");
+        LOGGER.info("goToCart() MOBILE");
+        getHeader().scrollTo();
         CartPageBase cartPageBase = getHeader().openCartPage();
         return cartPageBase;
     }
 
     @Override
     public void clickGoogleDataAgreementButton() {
-        LOGGER.info("clickGoogleDataAgreementButton()");
+        LOGGER.info("clickGoogleDataAgreementButton() MOBILE");
         getGoogleDataAgreementButton().click();
     }
 
@@ -69,5 +71,15 @@ public class HomePage extends HomePageBase implements IMobileUtils {
         return homePageUrl;
     }
 
+    @Override
+    public ItemPageBase viewRandomProductInformation() {
+        LOGGER.info("viewProductInformation()");
+        Random rand = new Random();
+        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+
+        ItemPageBase itemPage = getFeaturesItems().getProducts().get(index).clickViewProduct();
+
+        return itemPage;
+    }
 }
 
