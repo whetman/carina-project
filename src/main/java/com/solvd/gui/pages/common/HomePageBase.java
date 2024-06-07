@@ -33,5 +33,4 @@ public abstract class HomePageBase extends AbstractPageBase {
         LOGGER.info("getGoogleDataAgreementButton()");
         return googleDataAgreementButton;
     }
-
 }
