@@ -21,19 +21,6 @@ public abstract class AbstractTest implements IAbstractTest {
         return homePage;
     }
 
-//    @BeforeTest
-//    @Override
-//    public WebDriver getDriver(){
-//        DesiredCapabilities dc = new DesiredCapabilities();
-//        dc.setCapability("platformName", "ANDROID");
-//        dc.setCapability("appium:automationName", "UiAutomator2");
-//        dc.setCapability("appium:deviceName", "pixel_8_pro");
-//        dc.setCapability("appium:udid", "emulator-5554");
-//        dc.setCapability("browserName", "chrome");
-//        dc.setCapability("chromedriverExecutable", "/opt/homebrew/bin/chromedriver");
-//        return getDriver("default", dc, "http://192.168.1.138:4723/wd/hub");
-//    }
-
 //    @BeforeClass
 //    @Parameters({"browser"})
 //    public void setUp(String browser) {
