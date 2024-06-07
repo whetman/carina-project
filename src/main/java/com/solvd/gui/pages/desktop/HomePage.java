@@ -43,17 +43,6 @@ public class HomePage extends HomePageBase {
     }
 
     @Override
-    public ItemPageBase viewRandomProductInformation() {
-        LOGGER.info("viewProductInformation()");
-        Random rand = new Random();
-        int index = rand.nextInt(getFeaturesItems().getProducts().size());
-
-        ItemPageBase itemPage = getFeaturesItems().getProducts().get(index).clickViewProduct();
-
-        return itemPage;
-    }
-
-    @Override
     public CartPageBase goToCart() {
         LOGGER.info("goToCart()");
         CartPageBase cartPageBase = getHeader().openCartPage();
@@ -80,5 +69,16 @@ public class HomePage extends HomePageBase {
         return homePageUrl;
     }
 
+    @Override
+    public ItemPageBase viewRandomProductInformation() {
+        LOGGER.info("viewProductInformation()");
+
+        Random rand = new Random();
+        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+        getFeaturesItems().getProducts().get(index).scrollTo();
+        ItemPageBase itemPage = getFeaturesItems().getProducts().get(index).clickViewProduct();
+
+        return itemPage;
+    }
 }
 
