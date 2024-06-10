@@ -23,9 +23,19 @@ public abstract class ItemPageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract void changeQuantity(String quantity);
+    public void changeQuantity(String quantity) {
+        LOGGER.info("changeQuantity(" + quantity + ")");
+        getQuantityField().click();
+        getQuantityField().type(quantity);
+    }
 
-    public abstract CartPageBase addToCart();
+    public CartPageBase addToCart() {
+        LOGGER.info("addToCart()");
+        getAddToCartButton().click();
+        getContinueShopping().click();
+        CartPageBase cartPageBase = getHeader().openCartPage();
+        return cartPageBase;
+    }
 
     public ExtendedWebElement getQuantityField() {
         LOGGER.info("getQuantityField()");

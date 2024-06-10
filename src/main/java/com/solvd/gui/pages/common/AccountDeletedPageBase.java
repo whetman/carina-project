@@ -20,7 +20,11 @@ public abstract class AccountDeletedPageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract HomePageBase clickContinueToRedirect();
+    public HomePageBase clickContinueToRedirect() {
+        LOGGER.info("clickContinueToRedirect()");
+        getContinueButton().click();
+        return initPage(getDriver(), HomePageBase.class);
+    }
 
     public ExtendedWebElement getAccountDeletedMessage() {
         LOGGER.info("getAccountDeletedMessage()");

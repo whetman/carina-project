@@ -32,8 +32,16 @@ public abstract class PaymentPageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract PaymentDonePageBase enterPaymentDetailsAndContinue(String nameOnCard, String cardNumber, String cvc, String expirationMonth, String expirationYear);
-
+    public PaymentDonePageBase enterPaymentDetailsAndContinue(String nameOnCard, String cardNumber, String cvc, String expirationMonth, String expirationYear) {
+        LOGGER.info("enterPaymentDetailsAndContinue()");
+        getNameOnCardField().type(nameOnCard);
+        getCardNumberField().type(cardNumber);
+        getCvcField().type(cvc);
+        getExpirationMonthField().type(expirationMonth);
+        getExpirationYearField().type(expirationYear);
+        getSubmitButton().click();
+        return initPage(getDriver(), PaymentDonePageBase.class);
+    }
     public ExtendedWebElement getNameOnCardField() {
         LOGGER.info("getNameOnCardField()");
         return nameOnCardField;

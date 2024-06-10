@@ -1,6 +1,5 @@
 package com.solvd.gui.pages.common;
 
-import com.solvd.gui.components.featuresitems.FeaturesItems;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
@@ -21,7 +20,12 @@ public abstract class ProductsPageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract ProductsPageBase typeInSearchBar(String text);
+    public ProductsPageBase typeInSearchBar(String text) {
+        LOGGER.info("typeInSearchBar(" + text + ")");
+        getSearchBar().type(text);
+        getSearchButton().click();
+        return initPage(ProductsPageBase.class);
+    }
 
     public ExtendedWebElement getSearchBar() {
         LOGGER.info("getSearchBar()");

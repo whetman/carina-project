@@ -1,6 +1,5 @@
 package com.solvd.gui.pages.mobile;
 
-import com.solvd.gui.pages.common.PaymentDonePageBase;
 import com.solvd.gui.pages.common.PaymentPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
@@ -14,18 +13,7 @@ public class PaymentPage extends PaymentPageBase {
 
     public PaymentPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    public PaymentDonePageBase enterPaymentDetailsAndContinue(String nameOnCard, String cardNumber, String cvc, String expirationMonth, String expirationYear) {
-        LOGGER.info("enterPaymentDetailsAndContinue()");
-        getNameOnCardField().type(nameOnCard);
-        getCardNumberField().type(cardNumber);
-        getCvcField().type(cvc);
-        getExpirationMonthField().type(expirationMonth);
-        getExpirationYearField().type(expirationYear);
-        getSubmitButton().click();
-        return initPage(getDriver(), PaymentDonePageBase.class);
+        LOGGER.info("PaymentPage()");
     }
 
 }

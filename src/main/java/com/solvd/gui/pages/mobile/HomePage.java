@@ -5,7 +5,6 @@ import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.ItemPageBase;
-import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
 import org.openqa.selenium.WebDriver;
@@ -45,30 +44,10 @@ public class HomePage extends HomePageBase implements IMobileUtils {
 
     @Override
     public CartPageBase goToCart() {
-        LOGGER.info("goToCart() MOBILE");
+        LOGGER.info("goToCart()");
         getHeader().scrollTo();
         CartPageBase cartPageBase = getHeader().openCartPage();
         return cartPageBase;
-    }
-
-    @Override
-    public void clickGoogleDataAgreementButton() {
-        LOGGER.info("clickGoogleDataAgreementButton() MOBILE");
-        getGoogleDataAgreementButton().click();
-    }
-
-    @Override
-    public HomePageBase login(String email, String password) {
-        LOGGER.info("login(" + email + ")");
-        SignupLoginPageBase signupLoginPageBase = getHeader().openSignupLoginPage();
-        HomePageBase loggedHomePage = signupLoginPageBase.login(email, password);
-        return loggedHomePage;
-    }
-
-    @Override
-    public String getHomePageUrl() {
-        LOGGER.info("getHomePageUrl() = " + homePageUrl);
-        return homePageUrl;
     }
 
     @Override

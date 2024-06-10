@@ -13,14 +13,7 @@ public class ProductsPage extends ProductsPageBase {
 
     public ProductsPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    public ProductsPageBase typeInSearchBar(String text) {
-        LOGGER.info("typeInSearchBar(" + text + ")");
-        getSearchBar().type(text);
-        getSearchButton().click();
-        return initPage(ProductsPageBase.class);
+        LOGGER.info("ProductsPage()");
     }
 
 }

@@ -1,5 +1,6 @@
 package com.solvd.gui.pages.common;
 
+import com.solvd.gui.constants.Gender;
 import com.solvd.gui.models.AccountInformation;
 import com.zebrunner.carina.webdriver.decorator.ExtendedWebElement;
 import org.openqa.selenium.WebDriver;
@@ -80,9 +81,49 @@ public abstract class SignupPageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation);
+    public AccountCreatedPageBase enterAccountInformation(AccountInformation accountInformation) {
 
-    //public abstract ExtendedWebElement getEmailAlreadyExistsMessage();
+        LOGGER.info("enterAccountInformation()");
+
+        if (accountInformation.getGender().equals(Gender.MRS)) {
+            getTitleMrs().click();
+        } else {
+            getTitleMr().click();
+        }
+
+        getPasswordBox().scrollTo();
+        getPasswordBox().type(accountInformation.getPassword());
+
+        getDaysDropdown().scrollTo();
+        getDaysDropdown().click();
+        getDaysDropdown().select(accountInformation.getDayOfBirth());
+
+        getMonthsDropdown().scrollTo();
+        getMonthsDropdown().click();
+        getMonthsDropdown().select(accountInformation.getMonthOfBirth());
+
+        getYearsDropdown().scrollTo();
+        getYearsDropdown().click();
+        getYearsDropdown().select(accountInformation.getYearOfBirth());
+
+        getFirstNameBox().scrollTo();
+        getFirstNameBox().type(accountInformation.getSignupName());
+        getLastnameNameBox().type(accountInformation.getLastName());
+        getAddressBox().type(accountInformation.getAddress());
+
+        getCountryDropdown().scrollTo();
+
+        getCountryDropdown().click();
+        getCountryDropdown().select(accountInformation.getCountry());
+
+        getStateBox().type(accountInformation.getState());
+        getCityBox().type(accountInformation.getCity());
+        getZipcodeBox().type(accountInformation.getZipcode());
+        getMobileNumberBox().type(accountInformation.getMobileNumber());
+        getCreateAccountButton().click();
+
+        return initPage(getDriver(), AccountCreatedPageBase.class);
+    }
 
     public ExtendedWebElement getTitleMr() {
         LOGGER.info("getTitleMr()");

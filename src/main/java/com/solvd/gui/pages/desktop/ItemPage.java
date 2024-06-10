@@ -1,8 +1,6 @@
 package com.solvd.gui.pages.desktop;
 
-import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.ItemPageBase;
-import com.solvd.gui.pages.common.SignupPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -15,21 +13,7 @@ public class ItemPage extends ItemPageBase {
 
     public ItemPage(WebDriver driver) {
         super(driver);
+        LOGGER.info("ItemPage()");
     }
 
-    @Override
-    public void changeQuantity(String quantity) {
-        LOGGER.info("changeQuantity(" + quantity + ")");
-        getQuantityField().click();
-        getQuantityField().type(quantity);
-    }
-
-    @Override
-    public CartPageBase addToCart() {
-        LOGGER.info("addToCart()");
-        getAddToCartButton().click();
-        getContinueShopping().click();
-        CartPageBase cartPageBase = getHeader().openCartPage();
-        return cartPageBase;
-    }
 }

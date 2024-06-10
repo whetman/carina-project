@@ -35,9 +35,20 @@ public abstract class SignupLoginPageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract void createAccount(String name, String email);
+    public void createAccount(String name, String email) {
+        LOGGER.info("createAccount() " + name + ", " + email);
+        getNameBar().type(name);
+        getEmailSignupBar().type(email);
+        getSignupButton().click();
+    }
 
-    public abstract HomePageBase login(String email, String password);
+    public HomePageBase loginToAccount(String email, String password) {
+        LOGGER.info("login() " + email + ", " + password);
+        getEmailField().type(email);
+        getPasswordField().type(password);
+        getLoginButton().click();
+        return initPage(getDriver(), HomePageBase.class);
+    }
 
     public ExtendedWebElement getNameBar() {
         LOGGER.info("getNameBar()");
