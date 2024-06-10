@@ -13,6 +13,7 @@ public class PaymentDonePage extends PaymentDonePageBase {
 
     public PaymentDonePage(WebDriver driver) {
         super(driver);
+        LOGGER.info("PaymentDonePage");
     }
 
 }

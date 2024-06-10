@@ -17,17 +17,23 @@ public abstract class HomePageBase extends AbstractPageBase {
         super(driver);
     }
 
-    public abstract String getHomePageUrl();
-
     public abstract String addRandomProductToCart();
 
     public abstract ItemPageBase viewRandomProductInformation();
 
     public abstract CartPageBase goToCart();
 
-    public abstract void clickGoogleDataAgreementButton();
+    public void clickGoogleDataAgreementButton() {
+        LOGGER.info("clickGoogleDataAgreementButton()");
+        getGoogleDataAgreementButton().click();
+    }
 
-    public abstract HomePageBase login(String email, String password);
+    public HomePageBase login(String email, String password) {
+        LOGGER.info("login(" + email + ")");
+        SignupLoginPageBase signupLoginPageBase = getHeader().openSignupLoginPage();
+        HomePageBase loggedHomePage = signupLoginPageBase.loginToAccount(email, password);
+        return loggedHomePage;
+    }
 
     public ExtendedWebElement getGoogleDataAgreementButton() {
         LOGGER.info("getGoogleDataAgreementButton()");

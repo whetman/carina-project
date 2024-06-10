@@ -5,7 +5,6 @@ import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.ItemPageBase;
-import com.solvd.gui.pages.common.SignupLoginPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -47,26 +46,6 @@ public class HomePage extends HomePageBase {
         LOGGER.info("goToCart()");
         CartPageBase cartPageBase = getHeader().openCartPage();
         return cartPageBase;
-    }
-
-    @Override
-    public void clickGoogleDataAgreementButton() {
-        LOGGER.info("clickGoogleDataAgreementButton()");
-        getGoogleDataAgreementButton().click();
-    }
-
-    @Override
-    public HomePageBase login(String email, String password) {
-        LOGGER.info("login(" + email + ")");
-        SignupLoginPageBase signupLoginPageBase = getHeader().openSignupLoginPage();
-        HomePageBase loggedHomePage = signupLoginPageBase.login(email, password);
-        return loggedHomePage;
-    }
-
-    @Override
-    public String getHomePageUrl() {
-        LOGGER.info("getHomePageUrl() = " + homePageUrl);
-        return homePageUrl;
     }
 
     @Override

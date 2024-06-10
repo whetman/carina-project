@@ -1,7 +1,6 @@
 package com.solvd.gui.pages.desktop;
 
 import com.solvd.gui.pages.common.AccountDeletedPageBase;
-import com.solvd.gui.pages.common.HomePageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import org.openqa.selenium.WebDriver;
 import org.slf4j.Logger;
@@ -14,13 +13,7 @@ public class AccountDeletedPage extends AccountDeletedPageBase {
 
     public AccountDeletedPage(WebDriver driver) {
         super(driver);
-    }
-
-    @Override
-    public HomePageBase clickContinueToRedirect() {
-        LOGGER.info("clickContinueToRedirect()");
-        getContinueButton().click();
-        return initPage(getDriver(), HomePageBase.class);
+        LOGGER.info("AccountDeletedPage()");
     }
 
 }

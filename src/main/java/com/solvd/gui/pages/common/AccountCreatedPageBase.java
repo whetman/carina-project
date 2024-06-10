@@ -21,7 +21,11 @@ public abstract class AccountCreatedPageBase extends AbstractPageBase {
         setUiLoadedMarker(continueButton);
     }
 
-    public abstract HomePageBase continueAfterAccountCreated();
+    public HomePageBase continueAfterAccountCreated() {
+        LOGGER.info("continueAfterAccountCreated()");
+        getContinueButton().click();
+        return initPage(getDriver(), HomePageBase.class);
+    }
 
     public ExtendedWebElement getContinueButton() {
         LOGGER.info("getContinueButton()");
