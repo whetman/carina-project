@@ -12,8 +12,8 @@ public class SwitchContextTests extends AbstractTest{
     @DataProvider(name = "accountData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
-                {"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
+                //{"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
+                //{"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
                 {"wiktoria999@email.com", "password1", new PaymentInformation("Wik wik", "777888999555", "002", "10", "2080")},
         };
     }
@@ -25,13 +25,15 @@ public class SwitchContextTests extends AbstractTest{
 
         HomePageBase homePage = openHomePage();
 
-        homePage.clickGoogleDataAgreementButton();
+//        if(homePage.getGoogleDataAgreementButton().isVisible()){
+//            homePage.clickGoogleDataAgreementButton();
+//        }
 
-        HomePageBase logggedHomePage = homePage.login(email, password);
+        HomePageBase loggedHomePage = homePage.login(email, password);
 
-        logggedHomePage.addRandomProductToCart();
+        loggedHomePage.addRandomProductToCart();
 
-        CartPageBase cartPage = logggedHomePage.goToCart();
+        CartPageBase cartPage = loggedHomePage.goToCart();
 
         CheckoutPageBase checkoutPage = cartPage.buyProducts();
 

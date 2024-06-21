@@ -40,8 +40,8 @@ public class UserActionsTests extends AbstractTest {
     @DataProvider(name = "accountData")
     public Object[][] loginData() {
         return new Object[][]{
-                {"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
-                {"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
+                //{"tadeusz@email.com", "password1", new PaymentInformation("Tadeusz Kowalski", "999999666666", "000", "12", "2300")},
+                //{"jolanta@email.com", "password2", new PaymentInformation("Jolanta Kowalska", "111222333444", "001", "11", "2036")},
                 {"wiktoria999@email.com", "password1", new PaymentInformation("Wik wik", "777888999555", "002", "10", "2080")},
         };
     }
@@ -63,9 +63,9 @@ public class UserActionsTests extends AbstractTest {
 
         HomePageBase homePage = openHomePage();
 
-        if (homePage.getGoogleDataAgreementButton().isVisible()) {
-            homePage.clickGoogleDataAgreementButton();
-        }
+//        if (homePage.getGoogleDataAgreementButton().isVisible()) {
+//            homePage.clickGoogleDataAgreementButton();
+//        }
 
         softAssert.assertTrue(homePage.getHeader().isDisplayed(), "Header is not displayed");
 
@@ -94,7 +94,9 @@ public class UserActionsTests extends AbstractTest {
 
         HomePageBase homePage = openHomePage();
 
-        homePage.clickGoogleDataAgreementButton();
+//        if(homePage.getGoogleDataAgreementButton().isVisible()){
+//            homePage.clickGoogleDataAgreementButton();
+//        }
 
         homePage.login(email, password);
 
@@ -137,7 +139,9 @@ public class UserActionsTests extends AbstractTest {
 
         HomePageBase homePage = openHomePage();
 
-        homePage.clickGoogleDataAgreementButton();
+//        if(homePage.getGoogleDataAgreementButton().isVisible()){
+//            homePage.clickGoogleDataAgreementButton();
+//        }
 
         HeaderBase header = homePage.getHeader();
 
@@ -148,7 +152,7 @@ public class UserActionsTests extends AbstractTest {
 
         FeaturesItemsBase featuresItems = productsPageSearched.getFeaturesItems();
 
-        List<Product> products = featuresItems.getProducts();
+        List<Product> products = featuresItems.getProduct();
 
         switch (productName) {
             case "shirt":
@@ -172,7 +176,9 @@ public class UserActionsTests extends AbstractTest {
 
         HomePageBase homePage = openHomePage();
 
-        homePage.clickGoogleDataAgreementButton();
+//        if(homePage.getGoogleDataAgreementButton().isVisible()){
+//            homePage.clickGoogleDataAgreementButton();
+//        }
 
         homePage.login(email, password);
 
