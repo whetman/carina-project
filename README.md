@@ -34,6 +34,9 @@ This project uses the following dependencies:
 
 ## To-do
 
-- [ ] Migrate the whole pure-selenium project to the carina-project
+- [x] Migrate the whole pure-selenium project to the carina-project
 - [x] Fix enterAccountInformation() to work correctly with dropdown menu
 - [x] Find out how to make common methods for tests
+- [ ] Fix the SwitchContextTests for iOS
+- [ ] Use deep links
+- [ ] Move login so it is available for all pages
