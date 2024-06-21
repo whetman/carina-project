@@ -1,13 +1,15 @@
 package com.solvd.gui.pages.ios;
 
-import com.solvd.gui.components.product.Product;
+import com.solvd.gui.components.product.ProductBase;
 import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
 import com.solvd.gui.pages.common.ItemPageBase;
 import com.zebrunner.carina.utils.factory.DeviceType;
 import com.zebrunner.carina.utils.mobile.IMobileUtils;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,14 +32,18 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     @Override
     public String addRandomProductToCart() {
 
+        waitUntil(ExpectedConditions.presenceOfElementLocated(By.xpath(".//div[@class='product-image-wrapper']")), 10L);
+
         Random rand = new Random();
-        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+        int index = rand.nextInt(getFeaturesItems().getProduct().size());
 
         LOGGER.info("addRandomProductToCart(" + index + ")");
 
-        Product product = getFeaturesItems().getProducts().get(index);
+        ProductBase product = getFeaturesItems().getProduct().get(index);
+        product.scrollTo();
         product.click();
-        product.clickAddToCartButton(index);
+        product.getProductButtonIOS().get(index).click();
+        product.getContinueButton().scrollTo();
         product.clickContinueButton();
         return product.productDescriptionText();
     }
@@ -54,9 +60,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     public ItemPageBase viewRandomProductInformation() {
         LOGGER.info("viewProductInformation()");
         Random rand = new Random();
-        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+        int index = rand.nextInt(getFeaturesItems().getProduct().size());
 
-        ItemPageBase itemPage = getFeaturesItems().getProducts().get(index).clickViewProduct();
+        ItemPageBase itemPage = getFeaturesItems().getProduct().get(index).clickViewProduct();
 
         return itemPage;
     }

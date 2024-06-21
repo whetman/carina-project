@@ -1,4 +1,4 @@
-package com.solvd.gui.pages.mobile;
+package com.solvd.gui.pages.android;
 
 import com.solvd.gui.pages.common.PaymentDonePageBase;
 import com.solvd.gui.pages.desktop.HomePage;

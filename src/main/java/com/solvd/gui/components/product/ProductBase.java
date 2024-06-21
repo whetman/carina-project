@@ -6,13 +6,20 @@ import com.zebrunner.carina.webdriver.gui.AbstractUIObject;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.FindBy;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public abstract class ProductBase extends AbstractUIObject {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProductBase.class);
+
     @FindBy(xpath = "//div[@class='product-overlay']//a[contains(@class, 'btn')]")
     private List<ExtendedWebElement> productButton;
+
+    @FindBy(xpath = "//div[@class='features_items']//div[@class='product-image-wrapper']//a[@class=\"btn btn-default add-to-cart\"]")
+    private List<ExtendedWebElement> productButtonIOS;
 
     @FindBy(xpath = "//div[contains(@class, 'features_items')]//div[@class='single-products']")
     private List<ExtendedWebElement> productHoverElement;
@@ -33,20 +40,39 @@ public abstract class ProductBase extends AbstractUIObject {
         super(driver, searchContext);
     }
 
-    public abstract void clickContinueButton();
+    public void clickContinueButton() {
+        LOGGER.info("clickContinueButton()");
+        getContinueButton().click();
+    }
 
-    public abstract void clickAddToCartButton(int index);
+    public void hoverOverProduct(int index) {
+        LOGGER.info("hoverOverProduct(" + index + ")");
+        scrollTo();
+        getProductHoverElement().get(index).hover();
+    }
 
-    public abstract void hoverOverProduct(int index);
+    public String productPriceText() {
+        LOGGER.info("productPriceText()");
+        return getProductPrice().getText();
+    }
 
-    public abstract ItemPageBase clickViewProduct();
+    public String productDescriptionText() {
+        LOGGER.info("productDescriptionText()");
+        return getProductDescription().getText();
+    }
 
-    public abstract String productDescriptionText();
-
-    public abstract String productPriceText();
+    public ItemPageBase clickViewProduct() {
+        LOGGER.info("clickViewProduct()");
+        getViewProduct().click();
+        return initPage(getDriver(), ItemPageBase.class);
+    }
 
     public List<ExtendedWebElement> getProductButton() {
         return productButton;
+    }
+
+    public List<ExtendedWebElement> getProductButtonIOS() {
+        return productButtonIOS;
     }
 
     public List<ExtendedWebElement> getProductHoverElement() {

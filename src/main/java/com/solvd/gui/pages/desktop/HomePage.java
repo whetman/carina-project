@@ -1,6 +1,6 @@
 package com.solvd.gui.pages.desktop;
 
-import com.solvd.gui.components.product.Product;
+import com.solvd.gui.components.product.ProductBase;
 import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
@@ -30,13 +30,13 @@ public class HomePage extends HomePageBase {
     public String addRandomProductToCart() {
 
         Random rand = new Random();
-        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+        int index = rand.nextInt(getFeaturesItems().getProduct().size());
 
         LOGGER.info("addRandomProductToCart(" + index + ")");
 
-        Product product = getFeaturesItems().getProducts().get(index);
+        ProductBase product = getFeaturesItems().getProduct().get(index);
         product.hoverOverProduct(index);
-        product.clickAddToCartButton(index);
+        product.getProductButton().get(index).click();
         product.clickContinueButton();
         return product.productDescriptionText();
     }
@@ -53,9 +53,9 @@ public class HomePage extends HomePageBase {
         LOGGER.info("viewProductInformation()");
 
         Random rand = new Random();
-        int index = rand.nextInt(getFeaturesItems().getProducts().size());
-        getFeaturesItems().getProducts().get(index).scrollTo();
-        ItemPageBase itemPage = getFeaturesItems().getProducts().get(index).clickViewProduct();
+        int index = rand.nextInt(getFeaturesItems().getProduct().size());
+        getFeaturesItems().getProduct().get(index).scrollTo();
+        ItemPageBase itemPage = getFeaturesItems().getProduct().get(index).clickViewProduct();
 
         return itemPage;
     }

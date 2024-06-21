@@ -1,6 +1,6 @@
-package com.solvd.gui.pages.mobile;
+package com.solvd.gui.pages.android;
 
-import com.solvd.gui.components.product.Product;
+import com.solvd.gui.components.product.ProductBase;
 import com.solvd.gui.config.ConfigManager;
 import com.solvd.gui.pages.common.CartPageBase;
 import com.solvd.gui.pages.common.HomePageBase;
@@ -31,15 +31,15 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     public String addRandomProductToCart() {
 
         Random rand = new Random();
-        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+        int index = rand.nextInt(getFeaturesItems().getProduct().size());
 
         LOGGER.info("addRandomProductToCart(" + index + ")");
 
-        Product product = getFeaturesItems().getProducts().get(index);
-        product.click();
-        product.clickAddToCartButton(index);
-        product.clickContinueButton();
-        return product.productDescriptionText();
+        ProductBase productAndroid = getFeaturesItems().getProduct().get(index);
+        productAndroid.click();
+        productAndroid.getProductButton().get(index).click();
+        productAndroid.clickContinueButton();
+        return productAndroid.productDescriptionText();
     }
 
     @Override
@@ -54,9 +54,9 @@ public class HomePage extends HomePageBase implements IMobileUtils {
     public ItemPageBase viewRandomProductInformation() {
         LOGGER.info("viewProductInformation()");
         Random rand = new Random();
-        int index = rand.nextInt(getFeaturesItems().getProducts().size());
+        int index = rand.nextInt(getFeaturesItems().getProduct().size());
 
-        ItemPageBase itemPage = getFeaturesItems().getProducts().get(index).clickViewProduct();
+        ItemPageBase itemPage = getFeaturesItems().getProduct().get(index).clickViewProduct();
 
         return itemPage;
     }
